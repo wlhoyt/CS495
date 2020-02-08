@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1028162196284",
+    "firebase_url": "https://candor365-935a8.firebaseio.com",
+    "project_id": "candor365-935a8",
+    "storage_bucket": "candor365-935a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028162196284:android:0ea0d5a58333f7fd4b8439",
+        "android_client_info": {
+          "package_name": "com.example.candor365"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028162196284-rigc9rg3a8vkg0di259jlgd17l36acds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.candor365",
+            "certificate_hash": "55aca25139ffcf9a49e2e9edeb6db41fbe5c4422"
+          }
+        },
+        {
+          "client_id": "1028162196284-8ub0pk8lu2hc8o7ueouq2ocj3ofmjvvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt9g0PE1TXtd0Wp4L9RSzSbW-7akC4QmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028162196284-8ub0pk8lu2hc8o7ueouq2ocj3ofmjvvo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
