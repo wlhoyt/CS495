@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Candor365</string>
+    <string name="first_name">First Name</string>
+    <string name="welcome_to_candor">Welcome To Candor</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone #</string>
 </resources>
