@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "1028162196284-qqlh3k6or7l6gimhgeneg8o67h5u51jr.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.candor365",
-            "certificate_hash": "df5a2d33431ab1ea1f9f0a879a9cc40dc2595cfe"
-          }
-        },
-        {
           "client_id": "1028162196284-rigc9rg3a8vkg0di259jlgd17l36acds.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

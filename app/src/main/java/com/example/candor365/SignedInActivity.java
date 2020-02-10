@@ -58,7 +58,6 @@ public class SignedInActivity extends AppCompatActivity {
     private static final String TAG = "SignedInActivity";
 
     @BindView(android.R.id.content) View mRootView;
-
     @BindView(R2.id.user_profile_picture) ImageView mUserProfilePicture;
     @BindView(R.id.user_email) TextView mUserEmail;
     @BindView(R.id.user_display_name) TextView mUserDisplayName;
@@ -75,6 +74,7 @@ public class SignedInActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
