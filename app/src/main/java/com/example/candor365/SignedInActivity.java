@@ -172,23 +172,7 @@ public class SignedInActivity extends AppCompatActivity {
                         providers.add(getString(R.string.providers_google));
                         break;
                     case FacebookAuthProvider.PROVIDER_ID:
-                        providers.add(getString(R.string.providers_facebook));
-                        break;
-                    case TwitterAuthProvider.PROVIDER_ID:
-                        providers.add(getString(R.string.providers_twitter));
-                        break;
-                    case EmailAuthProvider.PROVIDER_ID:
-                        providers.add(getString(R.string.providers_email));
-                        break;
-                    case PhoneAuthProvider.PROVIDER_ID:
-                        providers.add(getString(R.string.providers_phone));
-                        break;
-                    case EMAIL_LINK_PROVIDER:
-                        providers.add(getString(R.string.providers_email_link));
-                        break;
-                    case FirebaseAuthProvider.PROVIDER_ID:
-                        // Ignore this provider, it's not very meaningful
-                        break;
+   ll ori   ;
                     default:
                         providers.add(info.getProviderId());
                 }
