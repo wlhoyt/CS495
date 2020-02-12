@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
             //signed in
-            Toast.makeText(getApplicationContext(),"Already Signed In", 5).show();
+            Toast.makeText(getApplicationContext(),"Already Signed In", Toast.LENGTH_SHORT).show();
             startActivity(SignedInActivity.createIntent(this, null));
         } else {
             // not signed in
