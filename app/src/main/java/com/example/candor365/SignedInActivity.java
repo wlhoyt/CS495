@@ -69,7 +69,7 @@ public class SignedInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         // user is now signed out
                         Toast.makeText(SignedInActivity.this, "USER SIGNED OUT", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(SignedInActivity.this, SignedInActivity.class));
+                        startActivity(new Intent(SignedInActivity.this, MainActivity.class));
                         finish();
                     }
                 });
