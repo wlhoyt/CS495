@@ -2,9 +2,11 @@ package com.example.candor365;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Button btnLogOut = (Button) findViewById(R.id.sign_out);
+
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -63,9 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     RC_SIGN_IN);
         }
     }
-    // [END on_start_check_user]
 
-    // [START onactivityresult]
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -75,38 +75,33 @@ public class MainActivity extends AppCompatActivity {
             // Successfully signed in
             if (resultCode == RESULT_OK) {
                 startActivity(SignedInActivity.createIntent(this, response));
+                Toast.makeText(this, "Logging IN", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
-                    showSnackbar(R.string.sign_in_cancelled);
+                    Toast.makeText(this, "Login cancelled", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    showSnackbar(R.string.no_internet_connection);
+                    Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
-                showSnackbar(R.string.unknown_error);
+                Toast.makeText(this, "It just Barfed " + resultCode, Toast.LENGTH_SHORT).show();
                 //Log.e(TAG, "Sign-in error: ", response.getError());
             }
         }
     }
 
-    public void onClick(View v) {
-        if (v.getId() == R.id.sign_out) {
-            AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(MainActivity.this, "Sign out Successful", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-
+    @NonNull
+    public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
+        return new Intent().setClass(context, MainActivity.class);
     }
+
     private void showSnackbar(@StringRes int errorMessageRes) {
         Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
     }
