@@ -53,27 +53,36 @@ import butterknife.OnClick;
 import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
 
 public class SignedInActivity extends AppCompatActivity {
+    private Button signoutButton;
 
-//    public void onClick(View v) {
-//        if (v.getId() == R.id.sign_out) {
-//            AuthUI.getInstance()
-//                    .signOut(this)
-//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            // user is now signed out
-//                            //startActivity(new Intent(SignedInActivity.this, SignedInActivity.class));
-//                            finish();
-//                        }
-//                    });
-//        }
-//    }
+    private View.OnClickListener signoutListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                signoutClicked();
+        }
+    };
+
+    public void signoutClicked() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // user is now signed out
+                        Toast.makeText(SignedInActivity.this, "USER SIGNED OUT", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(SignedInActivity.this, SignedInActivity.class));
+                        finish();
+                    }
+                });
+
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.signedin_activity);
+        signoutButton = (Button) findViewById(R.id.sign_out);
+        signoutButton.setOnClickListener(signoutListener);
     }
     @NonNull
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
