@@ -53,7 +53,6 @@ import butterknife.OnClick;
 import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
 
 public class SignedInActivity extends AppCompatActivity {
-    //final Button btnLogOut = (Button) findViewById(R.id.sign_out);
 
 //    public void onClick(View v) {
 //        if (v.getId() == R.id.sign_out) {
