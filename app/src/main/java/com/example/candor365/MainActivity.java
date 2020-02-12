@@ -2,6 +2,7 @@ package com.example.candor365;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.util.ExtraConstants;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -21,9 +33,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Arrays;
 
+import butterknife.BindView;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 472;
+    @BindView(android.R.id.content) View mRootView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(SignInActivity.createIntent(this, response));
+                startActivity(SignedInActivity.createIntent(this, response));
                 finish();
             } else {
                 // Sign in failed
@@ -75,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 showSnackbar(R.string.unknown_error);
-                Log.e(TAG, "Sign-in error: ", response.getError());
+                //Log.e(TAG, "Sign-in error: ", response.getError());
             }
         }
     }
@@ -86,11 +101,13 @@ public class MainActivity extends AppCompatActivity {
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
-                            // user is now signed out
-                            startActivity(new Intent(MyActivity.this, SignInActivity.class));
-                            finish();
+                            Toast.makeText(MainActivity.this, "Sign out Successful", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
+
+    }
+    private void showSnackbar(@StringRes int errorMessageRes) {
+        Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
     }
 }
