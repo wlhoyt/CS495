@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if(nfcAdapter !=null && nfcAdapter.isEnabled())
+        {
+            Toast.makeText(this,"NFC available!", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Toast.makeText(this,"NFC not available!", Toast.LENGTH_LONG).show();
+        }
 
     }
 
