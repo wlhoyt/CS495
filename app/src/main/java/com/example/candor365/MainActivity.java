@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if(nfcAdapter !=null && nfcAdapter.isEnabled())
+        if(nfcAdapter != null && nfcAdapter.isEnabled())
         {
             Toast.makeText(this,"NFC available!", Toast.LENGTH_LONG).show();
         }
