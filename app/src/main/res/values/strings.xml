@@ -8,4 +8,7 @@
     <string name="sign_in_cancelled">Signin attempt cancelled</string>
     <string name="unknown_error">Unknown Error</string>
     <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="view_schedule">View Schedule</string>
+    <string name="backButton">Back</string>
 </resources>

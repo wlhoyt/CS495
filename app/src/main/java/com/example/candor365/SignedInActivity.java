@@ -54,6 +54,7 @@ import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
 
 public class SignedInActivity extends AppCompatActivity {
     private Button signoutButton;
+    private Button viewScheduleButton;
 
     private View.OnClickListener signoutListener = new View.OnClickListener() {
         @Override
@@ -62,7 +63,7 @@ public class SignedInActivity extends AppCompatActivity {
         }
     };
 
-    public void signoutClicked() {
+    private void signoutClicked() {
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -76,6 +77,18 @@ public class SignedInActivity extends AppCompatActivity {
 
     }
 
+    private View.OnClickListener viewScheduleListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            viewScheduleClicked();
+        }
+    };
+
+    private void viewScheduleClicked(){
+        startActivity(new Intent(SignedInActivity.this, CalendarActivity.class));
+        finish();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +96,9 @@ public class SignedInActivity extends AppCompatActivity {
         setContentView(R.layout.signedin_activity);
         signoutButton = (Button) findViewById(R.id.sign_out);
         signoutButton.setOnClickListener(signoutListener);
+
+        viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
+        viewScheduleButton.setOnClickListener(viewScheduleListener);
     }
     @NonNull
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {

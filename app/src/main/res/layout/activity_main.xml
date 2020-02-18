@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton
+        android:id="@+id/googleSignInButton"
         style="@style/FirebaseUI.Button.AccountChooser.GoogleButton"
         android:layout_marginTop="331dp"
         android:layout_marginBottom="352dp"
