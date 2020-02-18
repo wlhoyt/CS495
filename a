@@ -1,0 +1,1740 @@
+[1mdiff --git a/.github/workflows/android.yml b/.github/workflows/android.yml[m
+[1mindex 2884129..d03d182 100644[m
+[1m--- a/.github/workflows/android.yml[m
+[1m+++ b/.github/workflows/android.yml[m
+[36m@@ -1,17 +1,17 @@[m
+[31m-name: Android CI[m
+[31m-[m
+[31m-on: [push][m
+[31m-[m
+[31m-jobs:[m
+[31m-  build:[m
+[31m-[m
+[31m-    runs-on: ubuntu-latest[m
+[31m-[m
+[31m-    steps:[m
+[31m-    - uses: actions/checkout@v2[m
+[31m-    - name: set up JDK 1.8[m
+[31m-      uses: actions/setup-java@v1[m
+[31m-      with:[m
+[31m-        java-version: 1.8[m
+[31m-    - name: Build with Gradle[m
+[31m-      run: ./gradlew build[m
+[32m+[m[32mname: Android CI[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mon: [push][m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mjobs:[m[41m[m
+[32m+[m[32m  build:[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    runs-on: ubuntu-latest[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    steps:[m[41m[m
+[32m+[m[32m    - uses: actions/checkout@v2[m[41m[m
+[32m+[m[32m    - name: set up JDK 1.8[m[41m[m
+[32m+[m[32m      uses: actions/setup-java@v1[m[41m[m
+[32m+[m[32m      with:[m[41m[m
+[32m+[m[32m        java-version: 1.8[m[41m[m
+[32m+[m[32m    - name: Build with Gradle[m[41m[m
+[32m+[m[32m      run: ./gradlew build[m[41m[m
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex 603b140..ebdd23d 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1,14 +1,14 @@[m
+[31m-*.iml[m
+[31m-.gradle[m
+[31m-/local.properties[m
+[31m-/.idea/caches[m
+[31m-/.idea/libraries[m
+[31m-/.idea/modules.xml[m
+[31m-/.idea/workspace.xml[m
+[31m-/.idea/navEditor.xml[m
+[31m-/.idea/assetWizardSettings.xml[m
+[31m-.DS_Store[m
+[31m-/build[m
+[31m-/captures[m
+[31m-.externalNativeBuild[m
+[31m-.cxx[m
+[32m+[m[32m*.iml[m[41m[m
+[32m+[m[32m.gradle[m[41m[m
+[32m+[m[32m/local.properties[m[41m[m
+[32m+[m[32m/.idea/caches[m[41m[m
+[32m+[m[32m/.idea/libraries[m[41m[m
+[32m+[m[32m/.idea/modules.xml[m[41m[m
+[32m+[m[32m/.idea/workspace.xml[m[41m[m
+[32m+[m[32m/.idea/navEditor.xml[m[41m[m
+[32m+[m[32m/.idea/assetWizardSettings.xml[m[41m[m
+[32m+[m[32m.DS_Store[m[41m[m
+[32m+[m[32m/build[m[41m[m
+[32m+[m[32m/captures[m[41m[m
+[32m+[m[32m.externalNativeBuild[m[41m[m
+[32m+[m[32m.cxx[m[41m[m
+[1mdiff --git a/.idea/codeStyles/Project.xml b/.idea/codeStyles/Project.xml[m
+[1mindex 681f41a..3279b6b 100644[m
+[1m--- a/.idea/codeStyles/Project.xml[m
+[1m+++ b/.idea/codeStyles/Project.xml[m
+[36m@@ -1,116 +1,116 @@[m
+[31m-<component name="ProjectCodeStyleConfiguration">[m
+[31m-  <code_scheme name="Project" version="173">[m
+[31m-    <codeStyleSettings language="XML">[m
+[31m-      <indentOptions>[m
+[31m-        <option name="CONTINUATION_INDENT_SIZE" value="4" />[m
+[31m-      </indentOptions>[m
+[31m-      <arrangement>[m
+[31m-        <rules>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>xmlns:android</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>xmlns:.*</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-              <order>BY_NAME</order>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>.*:id</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>.*:name</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>name</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>style</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>.*</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-              <order>BY_NAME</order>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>.*</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-              <order>ANDROID_ATTRIBUTE_ORDER</order>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-          <section>[m
+[31m-            <rule>[m
+[31m-              <match>[m
+[31m-                <AND>[m
+[31m-                  <NAME>.*</NAME>[m
+[31m-                  <XML_ATTRIBUTE />[m
+[31m-                  <XML_NAMESPACE>.*</XML_NAMESPACE>[m
+[31m-                </AND>[m
+[31m-              </match>[m
+[31m-              <order>BY_NAME</order>[m
+[31m-            </rule>[m
+[31m-          </section>[m
+[31m-        </rules>[m
+[31m-      </arrangement>[m
+[31m-    </codeStyleSettings>[m
+[31m-  </code_scheme>[m
+[32m+[m[32m<component name="ProjectCodeStyleConfiguration">[m[41m[m
+[32m+[m[32m  <code_scheme name="Project" version="173">[m[41m[m
+[32m+[m[32m    <codeStyleSettings language="XML">[m[41m[m
+[32m+[m[32m      <indentOptions>[m[41m[m
+[32m+[m[32m        <option name="CONTINUATION_INDENT_SIZE" value="4" />[m[41m[m
+[32m+[m[32m      </indentOptions>[m[41m[m
+[32m+[m[32m      <arrangement>[m[41m[m
+[32m+[m[32m        <rules>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>xmlns:android</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>xmlns:.*</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m              <order>BY_NAME</order>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>.*:id</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>.*:name</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>name</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>style</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>.*</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>^$</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m              <order>BY_NAME</order>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>.*</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m              <order>ANDROID_ATTRIBUTE_ORDER</order>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m          <section>[m[41m[m
+[32m+[m[32m            <rule>[m[41m[m
+[32m+[m[32m              <match>[m[41m[m
+[32m+[m[32m                <AND>[m[41m[m
+[32m+[m[32m                  <NAME>.*</NAME>[m[41m[m
+[32m+[m[32m                  <XML_ATTRIBUTE />[m[41m[m
+[32m+[m[32m                  <XML_NAMESPACE>.*</XML_NAMESPACE>[m[41m[m
+[32m+[m[32m                </AND>[m[41m[m
+[32m+[m[32m              </match>[m[41m[m
+[32m+[m[32m              <order>BY_NAME</order>[m[41m[m
+[32m+[m[32m            </rule>[m[41m[m
+[32m+[m[32m          </section>[m[41m[m
+[32m+[m[32m        </rules>[m[41m[m
+[32m+[m[32m      </arrangement>[m[41m[m
+[32m+[m[32m    </codeStyleSettings>[m[41m[m
+[32m+[m[32m  </code_scheme>[m[41m[m
+ </component>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/gradle.xml b/.idea/gradle.xml[m
+[1mindex d291b3d..2a80f60 100644[m
+[1m--- a/.idea/gradle.xml[m
+[1m+++ b/.idea/gradle.xml[m
+[36m@@ -1,16 +1,16 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="GradleSettings">[m
+[31m-    <option name="linkedExternalProjectsSettings">[m
+[31m-      <GradleProjectSettings>[m
+[31m-        <compositeConfiguration>[m
+[31m-          <compositeBuild compositeDefinitionSource="SCRIPT" />[m
+[31m-        </compositeConfiguration>[m
+[31m-        <option name="distributionType" value="DEFAULT_WRAPPED" />[m
+[31m-        <option name="externalProjectPath" value="$PROJECT_DIR$" />[m
+[31m-        <option name="resolveModulePerSourceSet" value="false" />[m
+[31m-        <option name="testRunner" value="PLATFORM" />[m
+[31m-      </GradleProjectSettings>[m
+[31m-    </option>[m
+[31m-  </component>[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m[41m[m
+[32m+[m[32m<project version="4">[m[41m[m
+[32m+[m[32m  <component name="GradleSettings">[m[41m[m
+[32m+[m[32m    <option name="linkedExternalProjectsSettings">[m[41m[m
+[32m+[m[32m      <GradleProjectSettings>[m[41m[m
+[32m+[m[32m        <compositeConfiguration>[m[41m[m
+[32m+[m[32m          <compositeBuild compositeDefinitionSource="SCRIPT" />[m[41m[m
+[32m+[m[32m        </compositeConfiguration>[m[41m[m
+[32m+[m[32m        <option name="distributionType" value="DEFAULT_WRAPPED" />[m[41m[m
+[32m+[m[32m        <option name="externalProjectPath" value="$PROJECT_DIR$" />[m[41m[m
+[32m+[m[32m        <option name="resolveModulePerSourceSet" value="false" />[m[41m[m
+[32m+[m[32m        <option name="testRunner" value="PLATFORM" />[m[41m[m
+[32m+[m[32m      </GradleProjectSettings>[m[41m[m
+[32m+[m[32m    </option>[m[41m[m
+[32m+[m[32m  </component>[m[41m[m
+ </project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/misc.xml b/.idea/misc.xml[m
+[1mindex 37a7509..f797995 100644[m
+[1m--- a/.idea/misc.xml[m
+[1m+++ b/.idea/misc.xml[m
+[36m@@ -1,9 +1,9 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">[m
+[31m-    <output url="file://$PROJECT_DIR$/build/classes" />[m
+[31m-  </component>[m
+[31m-  <component name="ProjectType">[m
+[31m-    <option name="id" value="Android" />[m
+[31m-  </component>[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m[41m[m
+[32m+[m[32m<project version="4">[m[41m[m
+[32m+[m[32m  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">[m[41m[m
+[32m+[m[32m    <output url="file://$PROJECT_DIR$/build/classes" />[m[41m[m
+[32m+[m[32m  </component>[m[41m[m
+[32m+[m[32m  <component name="ProjectType">[m[41m[m
+[32m+[m[32m    <option name="id" value="Android" />[m[41m[m
+[32m+[m[32m  </component>[m[41m[m
+ </project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml[m
+[1mindex 7f68460..9b770a6 100644[m
+[1m--- a/.idea/runConfigurations.xml[m
+[1m+++ b/.idea/runConfigurations.xml[m
+[36m@@ -1,12 +1,12 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="RunConfigurationProducerService">[m
+[31m-    <option name="ignoredProducers">[m
+[31m-      <set>[m
+[31m-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />[m
+[31m-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />[m
+[31m-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />[m
+[31m-      </set>[m
+[31m-    </option>[m
+[31m-  </component>[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m[41m[m
+[32m+[m[32m<project version="4">[m[41m[m
+[32m+[m[32m  <component name="RunConfigurationProducerService">[m[41m[m
+[32m+[m[32m    <option name="ignoredProducers">[m[41m[m
+[32m+[m[32m      <set>[m[41m[m
+[32m+[m[32m        <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />[m[41m[m
+[32m+[m[32m        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />[m[41m[m
+[32m+[m[32m        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />[m[41m[m
+[32m+[m[32m      </set>[m[41m[m
+[32m+[m[32m    </option>[m[41m[m
+[32m+[m[32m  </component>[m[41m[m
+ </project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/vcs.xml b/.idea/vcs.xml[m
+[1mindex 35eb1dd..c8397c9 100644[m
+[1m--- a/.idea/vcs.xml[m
+[1m+++ b/.idea/vcs.xml[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="VcsDirectoryMappings">[m
+[31m-    <mapping directory="" vcs="Git" />[m
+[31m-  </component>[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m[41m[m
+[32m+[m[32m<project version="4">[m[41m[m
+[32m+[m[32m  <component name="VcsDirectoryMappings">[m[41m[m
+[32m+[m[32m    <mapping directory="" vcs="Git" />[m[41m[m
+[32m+[m[32m  </component>[m[41m[m
+ </project>[m
+\ No newline at end of file[m
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 92b7281..0e3fb83 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1 +1 @@[m
+[31m-# Candor 365[m
+[32m+[m[32m# Candor 365[m[41m[m
+[1mdiff --git a/app/.gitignore b/app/.gitignore[m
+[1mindex 796b96d..3543521 100644[m
+[1m--- a/app/.gitignore[m
+[1m+++ b/app/.gitignore[m
+[36m@@ -1 +1 @@[m
+[31m-/build[m
+[32m+[m[32m/build[m[41m[m
+[1mdiff --git a/app/build.gradle b/app/build.gradle[m
+[1mindex 462657e..bbfa18c 100644[m
+[1m--- a/app/build.gradle[m
+[1m+++ b/app/build.gradle[m
+[36m@@ -1,29 +1,29 @@[m
+[31m-apply plugin: 'com.android.application'[m
+[31m-[m
+[31m-android {[m
+[31m-    compileSdkVersion 29[m
+[31m-    buildToolsVersion "29.0.2"[m
+[31m-    defaultConfig {[m
+[31m-        applicationId "com.example.candor365"[m
+[31m-        minSdkVersion 28[m
+[31m-        targetSdkVersion 29[m
+[31m-        versionCode 1[m
+[31m-        versionName "1.0"[m
+[31m-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"[m
+[31m-    }[m
+[31m-    buildTypes {[m
+[31m-        release {[m
+[31m-            minifyEnabled false[m
+[31m-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'[m
+[31m-        }[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-dependencies {[m
+[31m-    implementation fileTree(dir: 'libs', include: ['*.jar'])[m
+[31m-    implementation 'androidx.appcompat:appcompat:1.0.2'[m
+[31m-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'[m
+[31m-    testImplementation 'junit:junit:4.12'[m
+[31m-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'[m
+[31m-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'[m
+[31m-}[m
+[32m+[m[32mapply plugin: 'com.android.application'[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mandroid {[m[41m[m
+[32m+[m[32m    compileSdkVersion 29[m[41m[m
+[32m+[m[32m    buildToolsVersion "29.0.2"[m[41m[m
+[32m+[m[32m    defaultConfig {[m[41m[m
+[32m+[m[32m        applicationId "com.example.candor365"[m[41m[m
+[32m+[m[32m        minSdkVersion 28[m[41m[m
+[32m+[m[32m        targetSdkVersion 29[m[41m[m
+[32m+[m[32m        versionCode 1[m[41m[m
+[32m+[m[32m        versionName "1.0"[m[41m[m
+[32m+[m[32m        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m    buildTypes {[m[41m[m
+[32m+[m[32m        release {[m[41m[m
+[32m+[m[32m            minifyEnabled false[m[41m[m
+[32m+[m[32m            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'[m[41m[m
+[32m+[m[32m        }[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mdependencies {[m[41m[m
+[32m+[m[32m    implementation fileTree(dir: 'libs', include: ['*.jar'])[m[41m[m
+[32m+[m[32m    implementation 'androidx.appcompat:appcompat:1.0.2'[m[41m[m
+[32m+[m[32m    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'[m[41m[m
+[32m+[m[32m    testImplementation 'junit:junit:4.12'[m[41m[m
+[32m+[m[32m    androidTestImplementation 'androidx.test.ext:junit:1.1.0'[m[41m[m
+[32m+[m[32m    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'[m[41m[m
+[32m+[m[32m}[m[41m[m
+[1mdiff --git a/app/proguard-rules.pro b/app/proguard-rules.pro[m
+[1mindex f1b4245..6e7ffa9 100644[m
+[1m--- a/app/proguard-rules.pro[m
+[1m+++ b/app/proguard-rules.pro[m
+[36m@@ -1,21 +1,21 @@[m
+[31m-# Add project specific ProGuard rules here.[m
+[31m-# You can control the set of applied configuration files using the[m
+[31m-# proguardFiles setting in build.gradle.[m
+[31m-#[m
+[31m-# For more details, see[m
+[31m-#   http://developer.android.com/guide/developing/tools/proguard.html[m
+[31m-[m
+[31m-# If your project uses WebView with JS, uncomment the following[m
+[31m-# and specify the fully qualified class name to the JavaScript interface[m
+[31m-# class:[m
+[31m-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {[m
+[31m-#   public *;[m
+[31m-#}[m
+[31m-[m
+[31m-# Uncomment this to preserve the line number information for[m
+[31m-# debugging stack traces.[m
+[31m-#-keepattributes SourceFile,LineNumberTable[m
+[31m-[m
+[31m-# If you keep the line number information, uncomment this to[m
+[31m-# hide the original source file name.[m
+[31m-#-renamesourcefileattribute SourceFile[m
+[32m+[m[32m# Add project specific ProGuard rules here.[m[41m[m
+[32m+[m[32m# You can control the set of applied configuration files using the[m[41m[m
+[32m+[m[32m# proguardFiles setting in build.gradle.[m[41m[m
+[32m+[m[32m#[m[41m[m
+[32m+[m[32m# For more details, see[m[41m[m
+[32m+[m[32m#   http://developer.android.com/guide/developing/tools/proguard.html[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# If your project uses WebView with JS, uncomment the following[m[41m[m
+[32m+[m[32m# and specify the fully qualified class name to the JavaScript interface[m[41m[m
+[32m+[m[32m# class:[m[41m[m
+[32m+[m[32m#-keepclassmembers class fqcn.of.javascript.interface.for.webview {[m[41m[m
+[32m+[m[32m#   public *;[m[41m[m
+[32m+[m[32m#}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Uncomment this to preserve the line number information for[m[41m[m
+[32m+[m[32m# debugging stack traces.[m[41m[m
+[32m+[m[32m#-keepattributes SourceFile,LineNumberTable[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# If you keep the line number information, uncomment this to[m[41m[m
+[32m+[m[32m# hide the original source file name.[m[41m[m
+[32m+[m[32m#-renamesourcefileattribute SourceFile[m[41m[m
+[1mdiff --git a/app/src/androidTest/java/com/example/candor365/ExampleInstrumentedTest.java b/app/src/androidTest/java/com/example/candor365/ExampleInstrumentedTest.java[m
+[1mindex d8d4ced..54dc6c6 100644[m
+[1m--- a/app/src/androidTest/java/com/example/candor365/ExampleInstrumentedTest.java[m
+[1m+++ b/app/src/androidTest/java/com/example/candor365/ExampleInstrumentedTest.java[m
+[36m@@ -1,27 +1,27 @@[m
+[31m-package com.example.candor365;[m
+[31m-[m
+[31m-import android.content.Context;[m
+[31m-[m
+[31m-import androidx.test.platform.app.InstrumentationRegistry;[m
+[31m-import androidx.test.ext.junit.runners.AndroidJUnit4;[m
+[31m-[m
+[31m-import org.junit.Test;[m
+[31m-import org.junit.runner.RunWith;[m
+[31m-[m
+[31m-import static org.junit.Assert.*;[m
+[31m-[m
+[31m-/**[m
+[31m- * Instrumented test, which will execute on an Android device.[m
+[31m- *[m
+[31m- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>[m
+[31m- */[m
+[31m-@RunWith(AndroidJUnit4.class)[m
+[31m-public class ExampleInstrumentedTest {[m
+[31m-    @Test[m
+[31m-    public void useAppContext() {[m
+[31m-        // Context of the app under test.[m
+[31m-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();[m
+[31m-[m
+[31m-        assertEquals("com.example.candor365", appContext.getPackageName());[m
+[31m-    }[m
+[31m-}[m
+[32m+[m[32mpackage com.example.candor365;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport android.content.Context;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport androidx.test.platform.app.InstrumentationRegistry;[m[41m[m
+[32m+[m[32mimport androidx.test.ext.junit.runners.AndroidJUnit4;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport org.junit.Test;[m[41m[m
+[32m+[m[32mimport org.junit.runner.RunWith;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport static org.junit.Assert.*;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m/**[m[41m[m
+[32m+[m[32m * Instrumented test, which will execute on an Android device.[m[41m[m
+[32m+[m[32m *[m[41m[m
+[32m+[m[32m * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>[m[41m[m
+[32m+[m[32m */[m[41m[m
+[32m+[m[32m@RunWith(AndroidJUnit4.class)[m[41m[m
+[32m+[m[32mpublic class ExampleInstrumentedTest {[m[41m[m
+[32m+[m[32m    @Test[m[41m[m
+[32m+[m[32m    public void useAppContext() {[m[41m[m
+[32m+[m[32m        // Context of the app under test.[m[41m[m
+[32m+[m[32m        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        assertEquals("com.example.candor365", appContext.getPackageName());[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[1mdiff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml[m
+[1mindex b035d4d..c2260de 100644[m
+[1m--- a/app/src/main/AndroidManifest.xml[m
+[1m+++ b/app/src/main/AndroidManifest.xml[m
+[36m@@ -1,21 +1,21 @@[m
+[31m-<?xml version="1.0" encoding="utf-8"?>[m
+[31m-<manifest xmlns:android="http://schemas.android.com/apk/res/android"[m
+[31m-    package="com.example.candor365">[m
+[31m-[m
+[31m-    <application[m
+[31m-        android:allowBackup="true"[m
+[31m-        android:icon="@mipmap/ic_launcher"[m
+[31m-        android:label="@string/app_name"[m
+[31m-        android:roundIcon="@mipmap/ic_launcher_round"[m
+[31m-        android:supportsRtl="true"[m
+[31m-        android:theme="@style/AppTheme">[m
+[31m-        <activity android:name=".MainActivity">[m
+[31m-            <intent-filter>[m
+[31m-                <action android:name="android.intent.action.MAIN" />[m
+[31m-[m
+[31m-                <category android:name="android.intent.category.LAUNCHER" />[m
+[31m-            </intent-filter>[m
+[31m-        </activity>[m
+[31m-    </application>[m
+[31m-[m
+[32m+[m[32m<?xml version="1.0" encoding="utf-8"?>[m[41m[m
+[32m+[m[32m<manifest xmlns:android="http://schemas.android.com/apk/res/android"[m[41m[m
+[32m+[m[32m    package="com.example.candor365">[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    <application[m[41m[m
+[32m+[m[32m        android:allowBackup="true"[m[41m[m
+[32m+[m[32m        android:icon="@mipmap/ic_launcher"[m[41m[m
+[32m+[m[32m        android:label="@string/app_name"[m[41m[m
+[32m+[m[32m        android:roundIcon="@mipmap/ic_launcher_round"[m[41m[m
+[32m+[m[32m        android:supportsRtl="true"[m[41m[m
+[32m+[m[32m        android:theme="@style/AppTheme">[m[41m[m
+[32m+[m[32m        <activity android:name=".MainActivity">[m[41m[m
+[32m+[m[32m            <intent-filter>[m[41m[m
+[32m+[m[32m                <action android:name="android.intent.action.MAIN" />[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m                <category android:name="android.intent.category.LAUNCHER" />[m[41m[m
+[32m+[m[32m            </intent-filter>[m[41m[m
+[32m+[m[32m        </activity>[m[41m[m
+[32m+[m[32m    </application>[m[41m[m
+[32m+[m[41m[m
+ </manifest>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/candor365/MainActivity.java b/app/src/main/java/com/example/candor365/MainActivity.java[m
+[1mindex 0dddc9d..d51dcbe 100644[m
+[1m--- a/app/src/main/java/com/example/candor365/MainActivity.java[m
+[1m+++ b/app/src/main/java/com/example/candor365/MainActivity.java[m
+[36m@@ -1,14 +1,14 @@[m
+[31m-package com.example.candor365;[m
+[31m-[m
+[31m-import androidx.appcompat.app.AppCompatActivity;[m
+[31m-[m
+[31m-import android.os.Bundle;[m
+[31m-[m
+[31m-public class MainActivity extends AppCompatActivity {[m
+[31m-[m
+[31m-    @Override[m
+[31m-    protected void onCreate(Bundle savedInstanceState) {[m
+[31m-        super.onCreate(savedInstanceState);[m
+[31m-        setContentView(R.layout.activity_main);[m
+[31m-    }[m
+[31m-}[m
+[32m+[m[32mpackage com.example.candor365;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport androidx.appcompat.app.AppCompatActivity;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport android.os.Bundle;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mpublic class MainActivity extends AppCompatActivity {[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    @Override[m[41m[m
+[32m+[m[32m    protected void onCreate(Bundle savedInstanceState) {[m[41m[m
+[32m+[m[32m        super.onCreate(savedInstanceState);[m[41m[m
+[32m+[m[32m        setContentView(R.layout.activity_main);[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[1mdiff --git a/app/src/main/res/drawable-v24/ic_launcher_foreground.xml b/app/src/main/res/drawable-v24/ic_launcher_foreground.xml[m
+[1mindex 1f6bb29..971add5 100644[m
+[1m--- a/app/src/main/res/drawable-v24/ic_launcher_foreground.xml[m
+[1m+++ b/app/src/main/res/drawable-v24/ic_launcher_foreground.xml[m
+[36m@@ -1,34 +1,34 @@[m
+[31m-<vector xmlns:android="http://schemas.android.com/apk/res/android"[m
+[31m-    xmlns:aapt="http://schemas.android.com/aapt"[m
+[31m-    android:width="108dp"[m
+[31m-    android:height="108dp"[m
+[31m-    android:viewportWidth="108"[m
+[31m-    android:viewportHeight="108">[m
+[31m-    <path[m
+[31m-        android:fillType="evenOdd"[m
+[31m-        android:pathData="M32,64C32,64 38.39,52.99 44.13,50.95C51.37,48.37 70.14,49.57 70.14,49.57L108.26,87.69L108,109.01L75.97,107.97L32,64Z"[m
+[31m-        android:strokeWidth="1"[m
+[31m-        android:strokeColor="#00000000">[m
+[31m-        <aapt:attr name="android:fillColor">[m
+[31m-            <gradient[m
+[31m-                android:endX="78.5885"[m
+[31m-                android:endY="90.9159"[m
+[31m-                android:startX="48.7653"[m
+[31m-                android:startY="61.0927"[m
+[31m-                android:type="linear">[m
+[31m-                <item[m
+[31m-                    android:color="#44000000"[m
+[31m-                    android:offset="0.0" />[m
+[31m-                <item[m
+[31m-                    android:color="#00000000"[m
+[31m-                    android:offset="1.0" />[m
+[31m-            </gradient>[m
+[31m-        </aapt:attr>[m
+[31m-    </path>[m
+[31m-    <path[m
+[31m-        android:fillColor="#FFFFFF"[m
+[31m-        android:fillType="nonZero"[m
+[31m-        android:pathData="M66.94,46.02L66.94,46.02C72.44,50.07 76,56.61 76,64L32,64C32,56.61 35.56,50.11 40.98,46.06L36.18,41.19C35.45,40.45 35.45,39.3 36.18,38.56C36.91,37.81 38.05,37.81 38.78,38.56L44.25,44.05C47.18,42.57 50.48,41.71 54,41.71C57.48,41.71 60.78,42.57 63.68,44.05L69.11,38.56C69.84,37.81 70.98,37.81 71.71,38.56C72.44,39.3 72.44,40.45 71.71,41.19L66.94,46.02ZM62.94,56.92C64.08,56.92 65,56.01 65,54.88C65,53.76 64.08,52.85 62.94,52.85C61.8,52.85 60.88,53.76 60.88,54.88C60.88,56.01 61.8,56.92 62.94,56.92ZM45.06,56.92C46.2,56.92 47.13,56.01 47.13,54.88C47.13,53.76 46.2,52.85 45.06,52.85C43.92,52.85 43,53.76 43,54.88C43,56.01 43.92,56.92 45.06,56.92Z"[m
+[31m-        android:strokeWidth="1"[m
+[31m-        android:strokeColor="#00000000" />[m
+[31m-</vector>[m
+[32m+[m[32m<vector xmlns:android="http://schemas.android.com/apk/res/android"[m[41m[m
+[32m+[m[32m    xmlns:aapt="http://schemas.android.com/aapt"[m[41m[m
+[32m+[m[32m    android:width="108dp"[m[41m[m
+[32m+[m[32m    android:height="108dp"[m[41m[m
+[32m+[m[32m    android:viewportWidth="108"[m[41m[m
+[32m+[m[32m    android:viewportHeight="108">[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillType="evenOdd"[m[41m[m
+[32m+[m[32m        android:pathData="M32,64C32,64 38.39,52.99 44.13,50.95C51.37,48.37 70.14,49.57 70.14,49.57L108.26,87.69L108,109.01L75.97,107.97L32,64Z"[m[41m[m
+[32m+[m[32m        android:strokeWidth="1"[m[41m[m
+[32m+[m[32m        android:strokeColor="#00000000">[m[41m[m
+[32m+[m[32m        <aapt:attr name="android:fillColor">[m[41m[m
+[32m+[m[32m            <gradient[m[41m[m
+[32m+[m[32m                android:endX="78.5885"[m[41m[m
+[32m+[m[32m                android:endY="90.9159"[m[41m[m
+[32m+[m[32m                android:startX="48.7653"[m[41m[m
+[32m+[m[32m                android:startY="61.0927"[m[41m[m
+[32m+[m[32m                android:type="linear">[m[41m[m
+[32m+[m[32m                <item[m[41m[m
+[32m+[m[32m                    android:color="#44000000"[m[41m[m
+[32m+[m[32m                    android:offset="0.0" />[m[41m[m
+[32m+[m[32m                <item[m[41m[m
+[32m+[m[32m                    android:color="#00000000"[m[41m[m
+[32m+[m[32m                    android:offset="1.0" />[m[41m[m
+[32m+[m[32m            </gradient>[m[41m[m
+[32m+[m[32m        </aapt:attr>[m[41m[m
+[32m+[m[32m    </path>[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#FFFFFF"[m[41m[m
+[32m+[m[32m        android:fillType="nonZero"[m[41m[m
+[32m+[m[32m        android:pathData="M66.94,46.02L66.94,46.02C72.44,50.07 76,56.61 76,64L32,64C32,56.61 35.56,50.11 40.98,46.06L36.18,41.19C35.45,40.45 35.45,39.3 36.18,38.56C36.91,37.81 38.05,37.81 38.78,38.56L44.25,44.05C47.18,42.57 50.48,41.71 54,41.71C57.48,41.71 60.78,42.57 63.68,44.05L69.11,38.56C69.84,37.81 70.98,37.81 71.71,38.56C72.44,39.3 72.44,40.45 71.71,41.19L66.94,46.02ZM62.94,56.92C64.08,56.92 65,56.01 65,54.88C65,53.76 64.08,52.85 62.94,52.85C61.8,52.85 60.88,53.76 60.88,54.88C60.88,56.01 61.8,56.92 62.94,56.92ZM45.06,56.92C46.2,56.92 47.13,56.01 47.13,54.88C47.13,53.76 46.2,52.85 45.06,52.85C43.92,52.85 43,53.76 43,54.88C43,56.01 43.92,56.92 45.06,56.92Z"[m[41m[m
+[32m+[m[32m        android:strokeWidth="1"[m[41m[m
+[32m+[m[32m        android:strokeColor="#00000000" />[m[41m[m
+[32m+[m[32m</vector>[m[41m[m
+[1mdiff --git a/app/src/main/res/drawable/ic_launcher_background.xml b/app/src/main/res/drawable/ic_launcher_background.xml[m
+[1mindex 0d025f9..eed7a42 100644[m
+[1m--- a/app/src/main/res/drawable/ic_launcher_background.xml[m
+[1m+++ b/app/src/main/res/drawable/ic_launcher_background.xml[m
+[36m@@ -1,170 +1,170 @@[m
+[31m-<?xml version="1.0" encoding="utf-8"?>[m
+[31m-<vector xmlns:android="http://schemas.android.com/apk/res/android"[m
+[31m-    android:width="108dp"[m
+[31m-    android:height="108dp"[m
+[31m-    android:viewportWidth="108"[m
+[31m-    android:viewportHeight="108">[m
+[31m-    <path[m
+[31m-        android:fillColor="#008577"[m
+[31m-        android:pathData="M0,0h108v108h-108z" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M9,0L9,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M19,0L19,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M29,0L29,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M39,0L39,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M49,0L49,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M59,0L59,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M69,0L69,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M79,0L79,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M89,0L89,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M99,0L99,108"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,9L108,9"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,19L108,19"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,29L108,29"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,39L108,39"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,49L108,49"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,59L108,59"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,69L108,69"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,79L108,79"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,89L108,89"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M0,99L108,99"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M19,29L89,29"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M19,39L89,39"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M19,49L89,49"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M19,59L89,59"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M19,69L89,69"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M19,79L89,79"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M29,19L29,89"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M39,19L39,89"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M49,19L49,89"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M59,19L59,89"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M69,19L69,89"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-    <path[m
+[31m-        android:fillColor="#00000000"[m
+[31m-        android:pathData="M79,19L79,89"[m
+[31m-        android:strokeWidth="0.8"[m
+[31m-        android:strokeColor="#33FFFFFF" />[m
+[31m-</vector>[m
+[32m+[m[32m<?xml version="1.0" encoding="utf-8"?>[m[41m[m
+[32m+[m[32m<vector xmlns:android="http://schemas.android.com/apk/res/android"[m[41m[m
+[32m+[m[32m    android:width="108dp"[m[41m[m
+[32m+[m[32m    android:height="108dp"[m[41m[m
+[32m+[m[32m    android:viewportWidth="108"[m[41m[m
+[32m+[m[32m    android:viewportHeight="108">[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#008577"[m[41m[m
+[32m+[m[32m        android:pathData="M0,0h108v108h-108z" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M9,0L9,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M19,0L19,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M29,0L29,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M39,0L39,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M49,0L49,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M59,0L59,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M69,0L69,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M79,0L79,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M89,0L89,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M99,0L99,108"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,9L108,9"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,19L108,19"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,29L108,29"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,39L108,39"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,49L108,49"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,59L108,59"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,69L108,69"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,79L108,79"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,89L108,89"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M0,99L108,99"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M19,29L89,29"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M19,39L89,39"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M19,49L89,49"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M19,59L89,59"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M19,69L89,69"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M19,79L89,79"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M29,19L29,89"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M39,19L39,89"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M49,19L49,89"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M59,19L59,89"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M69,19L69,89"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m    <path[m[41m[m
+[32m+[m[32m        android:fillColor="#00000000"[m[41m[m
+[32m+[m[32m        android:pathData="M79,19L79,89"[m[41m[m
+[32m+[m[32m        android:strokeWidth="0.8"[m[41m[m
+[32m+[m[32m        android:strokeColor="#33FFFFFF" />[m[41m[m
+[32m+[m[32m</vector>[m[41m[m
+[1mdiff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml[m
+[1mindex 4fc2444..ca0c0de 100644[m
+[1m--- a/app/src/main/res/layout/activity_main.xml[m
+[1m+++ b/app/src/main/res/layout/activity_main.xml[m
+[36m@@ -1,18 +1,18 @@[m
+[31m-<?xml version="1.0" encoding="utf-8"?>[m
+[31m-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"[m
+[31m-    xmlns:app="http://schemas.android.com/apk/res-auto"[m
+[31m-    xmlns:tools="http://schemas.android.com/tools"[m
+[31m-    android:layout_width="match_parent"[m
+[31m-    android:layout_height="match_parent"[m
+[31m-    tools:context=".MainActivity">[m
+[31m-[m
+[31m-    <TextView[m
+[31m-        android:layout_width="wrap_content"[m
+[31m-        android:layout_height="wrap_content"[m
+[31m-        android:text="Hello World!"[m
+[31m-        app:layout_constraintBottom_toBottomOf="parent"[m
+[31m-        app:layout_constraintLeft_toLeftOf="parent"[m
+[31m-        app:layout_constraintRight_toRightOf="parent"[m
+[31m-        app:layout_constraintTop_toTopOf="parent" />[m
+[31m-[m
+[32m+[m[32m<?xml version="1.0" encoding="utf-8"?>[m[41m[m
+[32m+[m[32m<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"[m[41m[m
+[32m+[m[32m    xmlns:app="http://schemas.android.com/apk/res-auto"[m[41m[m
+[32m+[m[32m    xmlns:tools="http://schemas.android.com/tools"[m[41m[m
+[32m+[m[32m    android:layout_width="match_parent"[m[41m[m
+[32m+[m[32m    android:layout_height="match_parent"[m[41m[m
+[32m+[m[32m    tools:context=".MainActivity">[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    <TextView[m[41m[m
+[32m+[m[32m        android:layout_width="wrap_content"[m[41m[m
+[32m+[m[32m        android:layout_height="wrap_content"[m[41m[m
+[32m+[m[32m        android:text="Hello World!"[m[41m[m
+[32m+[m[32m        app:layout_constraintBottom_toBottomOf="parent"[m[41m[m
+[32m+[m[32m        app:layout_constraintLeft_toLeftOf="parent"[m[41m[m
+[32m+[m[32m        app:layout_constraintRight_toRightOf="parent"[m[41m[m
+[32m+[m[32m        app:layout_constraintTop_toTopOf="parent" />[m[41m[m
+[32m+[m[41m[m
+ </androidx.constraintlayout.widget.ConstraintLayout>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml b/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml[m
+[1mindex eca70cf..a26f6fb 100644[m
+[1m--- a/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml[m
+[1m+++ b/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml[m
+[36m@@ -1,5 +1,5 @@[m
+[31m-<?xml version="1.0" encoding="utf-8"?>[m
+[31m-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">[m
+[31m-    <background android:drawable="@drawable/ic_launcher_background" />[m
+[31m-    <foreground android:drawable="@drawable/ic_launcher_foreground" />[m
+[32m+[m[32m<?xml version="1.0" encoding="utf-8"?>[m[41m[m
+[32m+[m[32m<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">[m[41m[m
+[32m+[m[32m    <background android:drawable="@drawable/ic_launcher_background" />[m[41m[m
+[32m+[m[32m    <foreground android:drawable="@drawable/ic_launcher_foreground" />[m[41m[m
+ </adaptive-icon>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml b/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml[m
+[1mindex eca70cf..a26f6fb 100644[m
+[1m--- a/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml[m
+[1m+++ b/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml[m
+[36m@@ -1,5 +1,5 @@[m
+[31m-<?xml version="1.0" encoding="utf-8"?>[m
+[31m-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">[m
+[31m-    <background android:drawable="@drawable/ic_launcher_background" />[m
+[31m-    <foreground android:drawable="@drawable/ic_launcher_foreground" />[m
+[32m+[m[32m<?xml version="1.0" encoding="utf-8"?>[m[41m[m
+[32m+[m[32m<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">[m[41m[m
+[32m+[m[32m    <background android:drawable="@drawable/ic_launcher_background" />[m[41m[m
+[32m+[m[32m    <foreground android:drawable="@drawable/ic_launcher_foreground" />[m[41m[m
+ </adaptive-icon>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/res/values/colors.xml b/app/src/main/res/values/colors.xml[m
+[1mindex 69b2233..6b3f6ab 100644[m
+[1m--- a/app/src/main/res/values/colors.xml[m
+[1m+++ b/app/src/main/res/values/colors.xml[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-<?xml version="1.0" encoding="utf-8"?>[m
+[31m-<resources>[m
+[31m-    <color name="colorPrimary">#008577</color>[m
+[31m-    <color name="colorPrimaryDark">#00574B</color>[m
+[31m-    <color name="colorAccent">#D81B60</color>[m
+[31m-</resources>[m
+[32m+[m[32m<?xml version="1.0" encoding="utf-8"?>[m[41m[m
+[32m+[m[32m<resources>[m[41m[m
+[32m+[m[32m    <color name="colorPrimary">#008577</color>[m[41m[m
+[32m+[m[32m    <color name="colorPrimaryDark">#00574B</color>[m[41m[m
+[32m+[m[32m    <color name="colorAccent">#D81B60</color>[m[41m[m
+[32m+[m[32m</resources>[m[41m[m
+[1mdiff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml[m
+[1mindex d1f4cd5..a070d7e 100644[m
+[1m--- a/app/src/main/res/values/strings.xml[m
+[1m+++ b/app/src/main/res/values/strings.xml[m
+[36m@@ -1,3 +1,3 @@[m
+[31m-<resources>[m
+[31m-    <string name="app_name">Candor365</string>[m
+[31m-</resources>[m
+[32m+[m[32m<resources>[m[41m[m
+[32m+[m[32m    <string name="app_name">Candor365</string>[m[41m[m
+[32m+[m[32m</resources>[m[41m[m
+[1mdiff --git a/app/src/main/res/values/styles.xml b/app/src/main/res/values/styles.xml[m
+[1mindex 5885930..6f19b47 100644[m
+[1m--- a/app/src/main/res/values/styles.xml[m
+[1m+++ b/app/src/main/res/values/styles.xml[m
+[36m@@ -1,11 +1,11 @@[m
+[31m-<resources>[m
+[31m-[m
+[31m-    <!-- Base application theme. -->[m
+[31m-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">[m
+[31m-        <!-- Customize your theme here. -->[m
+[31m-        <item name="colorPrimary">@color/colorPrimary</item>[m
+[31m-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>[m
+[31m-        <item name="colorAccent">@color/colorAccent</item>[m
+[31m-    </style>[m
+[31m-[m
+[31m-</resources>[m
+[32m+[m[32m<resources>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    <!-- Base application theme. -->[m[41m[m
+[32m+[m[32m    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">[m[41m[m
+[32m+[m[32m        <!-- Customize your theme here. -->[m[41m[m
+[32m+[m[32m        <item name="colorPrimary">@color/colorPrimary</item>[m[41m[m
+[32m+[m[32m        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>[m[41m[m
+[32m+[m[32m        <item name="colorAccent">@color/colorAccent</item>[m[41m[m
+[32m+[m[32m    </style>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m</resources>[m[41m[m
+[1mdiff --git a/app/src/test/java/com/example/candor365/ExampleUnitTest.java b/app/src/test/java/com/example/candor365/ExampleUnitTest.java[m
+[1mindex 91e83df..73b73ac 100644[m
+[1m--- a/app/src/test/java/com/example/candor365/ExampleUnitTest.java[m
+[1m+++ b/app/src/test/java/com/example/candor365/ExampleUnitTest.java[m
+[36m@@ -1,17 +1,17 @@[m
+[31m-package com.example.candor365;[m
+[31m-[m
+[31m-import org.junit.Test;[m
+[31m-[m
+[31m-import static org.junit.Assert.*;[m
+[31m-[m
+[31m-/**[m
+[31m- * Example local unit test, which will execute on the development machine (host).[m
+[31m- *[m
+[31m- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>[m
+[31m- */[m
+[31m-public class ExampleUnitTest {[m
+[31m-    @Test[m
+[31m-    public void addition_isCorrect() {[m
+[31m-        assertEquals(4, 2 + 2);[m
+[31m-    }[m
+[32m+[m[32mpackage com.example.candor365;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport org.junit.Test;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mimport static org.junit.Assert.*;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m/**[m[41m[m
+[32m+[m[32m * Example local unit test, which will execute on the development machine (host).[m[41m[m
+[32m+[m[32m *[m[41m[m
+[32m+[m[32m * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>[m[41m[m
+[32m+[m[32m */[m[41m[m
+[32m+[m[32mpublic class ExampleUnitTest {[m[41m[m
+[32m+[m[32m    @Test[m[41m[m
+[32m+[m[32m    public void addition_isCorrect() {[m[41m[m
+[32m+[m[32m        assertEquals(4, 2 + 2);[m[41m[m
+[32m+[m[32m    }[m[41m[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/build.gradle b/build.gradle[m
+[1mindex a5bb815..4d044a6 100644[m
+[1m--- a/build.gradle[m
+[1m+++ b/build.gradle[m
+[36m@@ -1,27 +1,27 @@[m
+[31m-// Top-level build file where you can add configuration options common to all sub-projects/modules.[m
+[31m-[m
+[31m-buildscript {[m
+[31m-    repositories {[m
+[31m-        google()[m
+[31m-        jcenter()[m
+[31m-        [m
+[31m-    }[m
+[31m-    dependencies {[m
+[31m-        classpath 'com.android.tools.build:gradle:3.5.3'[m
+[31m-        [m
+[31m-        // NOTE: Do not place your application dependencies here; they belong[m
+[31m-        // in the individual module build.gradle files[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-allprojects {[m
+[31m-    repositories {[m
+[31m-        google()[m
+[31m-        jcenter()[m
+[31m-        [m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-task clean(type: Delete) {[m
+[31m-    delete rootProject.buildDir[m
+[31m-}[m
+[32m+[m[32m// Top-level build file where you can add configuration options common to all sub-projects/modules.[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mbuildscript {[m[41m[m
+[32m+[m[32m    repositories {[m[41m[m
+[32m+[m[32m        google()[m[41m[m
+[32m+[m[32m        jcenter()[m[41m[m
+[32m+[m[41m        [m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m    dependencies {[m[41m[m
+[32m+[m[32m        classpath 'com.android.tools.build:gradle:3.5.3'[m[41m[m
+[32m+[m[41m        [m
+[32m+[m[32m        // NOTE: Do not place your application dependencies here; they belong[m[41m[m
+[32m+[m[32m        // in the individual module build.gradle files[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mallprojects {[m[41m[m
+[32m+[m[32m    repositories {[m[41m[m
+[32m+[m[32m        google()[m[41m[m
+[32m+[m[32m        jcenter()[m[41m[m
+[32m+[m[41m        [m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mtask clean(type: Delete) {[m[41m[m
+[32m+[m[32m    delete rootProject.buildDir[m[41m[m
+[32m+[m[32m}[m[41m[m
+[1mdiff --git a/gradle.properties b/gradle.properties[m
+[1mindex 199d16e..55f37b3 100644[m
+[1m--- a/gradle.properties[m
+[1m+++ b/gradle.properties[m
+[36m@@ -1,20 +1,20 @@[m
+[31m-# Project-wide Gradle settings.[m
+[31m-# IDE (e.g. Android Studio) users:[m
+[31m-# Gradle settings configured through the IDE *will override*[m
+[31m-# any settings specified in this file.[m
+[31m-# For more details on how to configure your build environment visit[m
+[31m-# http://www.gradle.org/docs/current/userguide/build_environment.html[m
+[31m-# Specifies the JVM arguments used for the daemon process.[m
+[31m-# The setting is particularly useful for tweaking memory settings.[m
+[31m-org.gradle.jvmargs=-Xmx1536m[m
+[31m-# When configured, Gradle will run in incubating parallel mode.[m
+[31m-# This option should only be used with decoupled projects. More details, visit[m
+[31m-# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects[m
+[31m-# org.gradle.parallel=true[m
+[31m-# AndroidX package structure to make it clearer which packages are bundled with the[m
+[31m-# Android operating system, and which are packaged with your app's APK[m
+[31m-# https://developer.android.com/topic/libraries/support-library/androidx-rn[m
+[31m-android.useAndroidX=true[m
+[31m-# Automatically convert third-party libraries to use AndroidX[m
+[31m-android.enableJetifier=true[m
+[31m-[m
+[32m+[m[32m# Project-wide Gradle settings.[m[41m[m
+[32m+[m[32m# IDE (e.g. Android Studio) users:[m[41m[m
+[32m+[m[32m# Gradle settings configured through the IDE *will override*[m[41m[m
+[32m+[m[32m# any settings specified in this file.[m[41m[m
+[32m+[m[32m# For more details on how to configure your build environment visit[m[41m[m
+[32m+[m[32m# http://www.gradle.org/docs/current/userguide/build_environment.html[m[41m[m
+[32m+[m[32m# Specifies the JVM arguments used for the daemon process.[m[41m[m
+[32m+[m[32m# The setting is particularly useful for tweaking memory settings.[m[41m[m
+[32m+[m[32morg.gradle.jvmargs=-Xmx1536m[m[41m[m
+[32m+[m[32m# When configured, Gradle will run in incubating parallel mode.[m[41m[m
+[32m+[m[32m# This option should only be used with decoupled projects. More details, visit[m[41m[m
+[32m+[m[32m# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects[m[41m[m
+[32m+[m[32m# org.gradle.parallel=true[m[41m[m
+[32m+[m[32m# AndroidX package structure to make it clearer which packages are bundled with the[m[41m[m
+[32m+[m[32m# Android operating system, and which are packaged with your app's APK[m[41m[m
+[32m+[m[32m# https://developer.android.com/topic/libraries/support-library/androidx-rn[m[41m[m
+[32m+[m[32mandroid.useAndroidX=true[m[41m[m
+[32m+[m[32m# Automatically convert third-party libraries to use AndroidX[m[41m[m
+[32m+[m[32mandroid.enableJetifier=true[m[41m[m
+[32m+[m[41m[m
+[1mdiff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties[m
+[1mindex e779b55..033104b 100644[m
+[1m--- a/gradle/wrapper/gradle-wrapper.properties[m
+[1m+++ b/gradle/wrapper/gradle-wrapper.properties[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-#Thu Jan 30 15:13:22 CST 2020[m
+[31m-distributionBase=GRADLE_USER_HOME[m
+[31m-distributionPath=wrapper/dists[m
+[31m-zipStoreBase=GRADLE_USER_HOME[m
+[31m-zipStorePath=wrapper/dists[m
+[31m-distributionUrl=https\://services.gradle.org/distributions/gradle-5.4.1-all.zip[m
+[32m+[m[32m#Thu Jan 30 15:13:22 CST 2020[m[41m[m
+[32m+[m[32mdistributionBase=GRADLE_USER_HOME[m[41m[m
+[32m+[m[32mdistributionPath=wrapper/dists[m[41m[m
+[32m+[m[32mzipStoreBase=GRADLE_USER_HOME[m[41m[m
+[32m+[m[32mzipStorePath=wrapper/dists[m[41m[m
+[32m+[m[32mdistributionUrl=https\://services.gradle.org/distributions/gradle-5.4.1-all.zip[m[41m[m
+[1mdiff --git a/gradlew b/gradlew[m
+[1mindex cccdd3d..518efff 100755[m
+[1m--- a/gradlew[m
+[1m+++ b/gradlew[m
+[36m@@ -1,172 +1,172 @@[m
+[31m-#!/usr/bin/env sh[m
+[31m-[m
+[31m-##############################################################################[m
+[31m-##[m
+[31m-##  Gradle start up script for UN*X[m
+[31m-##[m
+[31m-##############################################################################[m
+[31m-[m
+[31m-# Attempt to set APP_HOME[m
+[31m-# Resolve links: $0 may be a link[m
+[31m-PRG="$0"[m
+[31m-# Need this for relative symlinks.[m
+[31m-while [ -h "$PRG" ] ; do[m
+[31m-    ls=`ls -ld "$PRG"`[m
+[31m-    link=`expr "$ls" : '.*-> \(.*\)$'`[m
+[31m-    if expr "$link" : '/.*' > /dev/null; then[m
+[31m-        PRG="$link"[m
+[31m-    else[m
+[31m-        PRG=`dirname "$PRG"`"/$link"[m
+[31m-    fi[m
+[31m-done[m
+[31m-SAVED="`pwd`"[m
+[31m-cd "`dirname \"$PRG\"`/" >/dev/null[m
+[31m-APP_HOME="`pwd -P`"[m
+[31m-cd "$SAVED" >/dev/null[m
+[31m-[m
+[31m-APP_NAME="Gradle"[m
+[31m-APP_BASE_NAME=`basename "$0"`[m
+[31m-[m
+[31m-# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.[m
+[31m-DEFAULT_JVM_OPTS=""[m
+[31m-[m
+[31m-# Use the maximum available, or set MAX_FD != -1 to use that value.[m
+[31m-MAX_FD="maximum"[m
+[31m-[m
+[31m-warn () {[m
+[31m-    echo "$*"[m
+[31m-}[m
+[31m-[m
+[31m-die () {[m
+[31m-    echo[m
+[31m-    echo "$*"[m
+[31m-    echo[m
+[31m-    exit 1[m
+[31m-}[m
+[31m-[m
+[31m-# OS specific support (must be 'true' or 'false').[m
+[31m-cygwin=false[m
+[31m-msys=false[m
+[31m-darwin=false[m
+[31m-nonstop=false[m
+[31m-case "`uname`" in[m
+[31m-  CYGWIN* )[m
+[31m-    cygwin=true[m
+[31m-    ;;[m
+[31m-  Darwin* )[m
+[31m-    darwin=true[m
+[31m-    ;;[m
+[31m-  MINGW* )[m
+[31m-    msys=true[m
+[31m-    ;;[m
+[31m-  NONSTOP* )[m
+[31m-    nonstop=true[m
+[31m-    ;;[m
+[31m-esac[m
+[31m-[m
+[31m-CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar[m
+[31m-[m
+[31m-# Determine the Java command to use to start the JVM.[m
+[31m-if [ -n "$JAVA_HOME" ] ; then[m
+[31m-    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then[m
+[31m-        # IBM's JDK on AIX uses strange locations for the executables[m
+[31m-        JAVACMD="$JAVA_HOME/jre/sh/java"[m
+[31m-    else[m
+[31m-        JAVACMD="$JAVA_HOME/bin/java"[m
+[31m-    fi[m
+[31m-    if [ ! -x "$JAVACMD" ] ; then[m
+[31m-        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME[m
+[31m-[m
+[31m-Please set the JAVA_HOME variable in your environment to match the[m
+[31m-location of your Java installation."[m
+[31m-    fi[m
+[31m-else[m
+[31m-    JAVACMD="java"[m
+[31m-    which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.[m
+[31m-[m
+[31m-Please set the JAVA_HOME variable in your environment to match the[m
+[31m-location of your Java installation."[m
+[31m-fi[m
+[31m-[m
+[31m-# Increase the maximum file descriptors if we can.[m
+[31m-if [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then[m
+[31m-    MAX_FD_LIMIT=`ulimit -H -n`[m
+[31m-    if [ $? -eq 0 ] ; then[m
+[31m-        if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then[m
+[31m-            MAX_FD="$MAX_FD_LIMIT"[m
+[31m-        fi[m
+[31m-        ulimit -n $MAX_FD[m
+[31m-        if [ $? -ne 0 ] ; then[m
+[31m-            warn "Could not set maximum file descriptor limit: $MAX_FD"[m
+[31m-        fi[m
+[31m-    else[m
+[31m-        warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"[m
+[31m-    fi[m
+[31m-fi[m
+[31m-[m
+[31m-# For Darwin, add options to specify how the application appears in the dock[m
+[31m-if $darwin; then[m
+[31m-    GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""[m
+[31m-fi[m
+[31m-[m
+[31m-# For Cygwin, switch paths to Windows format before running java[m
+[31m-if $cygwin ; then[m
+[31m-    APP_HOME=`cygpath --path --mixed "$APP_HOME"`[m
+[31m-    CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`[m
+[31m-    JAVACMD=`cygpath --unix "$JAVACMD"`[m
+[31m-[m
+[31m-    # We build the pattern for arguments to be converted via cygpath[m
+[31m-    ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`[m
+[31m-    SEP=""[m
+[31m-    for dir in $ROOTDIRSRAW ; do[m
+[31m-        ROOTDIRS="$ROOTDIRS$SEP$dir"[m
+[31m-        SEP="|"[m
+[31m-    done[m
+[31m-    OURCYGPATTERN="(^($ROOTDIRS))"[m
+[31m-    # Add a user-defined pattern to the cygpath arguments[m
+[31m-    if [ "$GRADLE_CYGPATTERN" != "" ] ; then[m
+[31m-        OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"[m
+[31m-    fi[m
+[31m-    # Now convert the arguments - kludge to limit ourselves to /bin/sh[m
+[31m-    i=0[m
+[31m-    for arg in "$@" ; do[m
+[31m-        CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`[m
+[31m-        CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option[m
+[31m-[m
+[31m-        if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition[m
+[31m-            eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`[m
+[31m-        else[m
+[31m-            eval `echo args$i`="\"$arg\""[m
+[31m-        fi[m
+[31m-        i=$((i+1))[m
+[31m-    done[m
+[31m-    case $i in[m
+[31m-        (0) set -- ;;[m
+[31m-        (1) set -- "$args0" ;;[m
+[31m-        (2) set -- "$args0" "$args1" ;;[m
+[31m-        (3) set -- "$args0" "$args1" "$args2" ;;[m
+[31m-        (4) set -- "$args0" "$args1" "$args2" "$args3" ;;[m
+[31m-        (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;[m
+[31m-        (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;[m
+[31m-        (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;[m
+[31m-        (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;[m
+[31m-        (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;[m
+[31m-    esac[m
+[31m-fi[m
+[31m-[m
+[31m-# Escape application args[m
+[31m-save () {[m
+[31m-    for i do printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/" ; done[m
+[31m-    echo " "[m
+[31m-}[m
+[31m-APP_ARGS=$(save "$@")[m
+[31m-[m
+[31m-# Collect all arguments for the java command, following the shell quoting and substitution rules[m
+[31m-eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "\"-Dorg.gradle.appname=$APP_BASE_NAME\"" -classpath "\"$CLASSPATH\"" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"[m
+[31m-[m
+[31m-# by default we should be in the correct project dir, but when run from Finder on Mac, the cwd is wrong[m
+[31m-if [ "$(uname)" = "Darwin" ] && [ "$HOME" = "$PWD" ]; then[m
+[31m-  cd "$(dirname "$0")"[m
+[31m-fi[m
+[31m-[m
+[31m-exec "$JAVACMD" "$@"[m
+[32m+[m[32m#!/usr/bin/env sh[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m##############################################################################[m[41m[m
+[32m+[m[32m##[m[41m[m
+[32m+[m[32m##  Gradle start up script for UN*X[m[41m[m
+[32m+[m[32m##[m[41m[m
+[32m+[m[32m##############################################################################[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Attempt to set APP_HOME[m[41m[m
+[32m+[m[32m# Resolve links: $0 may be a link[m[41m[m
+[32m+[m[32mPRG="$0"[m[41m[m
+[32m+[m[32m# Need this for relative symlinks.[m[41m[m
+[32m+[m[32mwhile [ -h "$PRG" ] ; do[m[41m[m
+[32m+[m[32m    ls=`ls -ld "$PRG"`[m[41m[m
+[32m+[m[32m    link=`expr "$ls" : '.*-> \(.*\)$'`[m[41m[m
+[32m+[m[32m    if expr "$link" : '/.*' > /dev/null; then[m[41m[m
+[32m+[m[32m        PRG="$link"[m[41m[m
+[32m+[m[32m    else[m[41m[m
+[32m+[m[32m        PRG=`dirname "$PRG"`"/$link"[m[41m[m
+[32m+[m[32m    fi[m[41m[m
+[32m+[m[32mdone[m[41m[m
+[32m+[m[32mSAVED="`pwd`"[m[41m[m
+[32m+[m[32mcd "`dirname \"$PRG\"`/" >/dev/null[m[41m[m
+[32m+[m[32mAPP_HOME="`pwd -P`"[m[41m[m
+[32m+[m[32mcd "$SAVED" >/dev/null[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mAPP_NAME="Gradle"[m[41m[m
+[32m+[m[32mAPP_BASE_NAME=`basename "$0"`[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.[m[41m[m
+[32m+[m[32mDEFAULT_JVM_OPTS=""[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Use the maximum available, or set MAX_FD != -1 to use that value.[m[41m[m
+[32m+[m[32mMAX_FD="maximum"[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mwarn () {[m[41m[m
+[32m+[m[32m    echo "$*"[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mdie () {[m[41m[m
+[32m+[m[32m    echo[m[41m[m
+[32m+[m[32m    echo "$*"[m[41m[m
+[32m+[m[32m    echo[m[41m[m
+[32m+[m[32m    exit 1[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# OS specific support (must be 'true' or 'false').[m[41m[m
+[32m+[m[32mcygwin=false[m[41m[m
+[32m+[m[32mmsys=false[m[41m[m
+[32m+[m[32mdarwin=false[m[41m[m
+[32m+[m[32mnonstop=false[m[41m[m
+[32m+[m[32mcase "`uname`" in[m[41m[m
+[32m+[m[32m  CYGWIN* )[m[41m[m
+[32m+[m[32m    cygwin=true[m[41m[m
+[32m+[m[32m    ;;[m[41m[m
+[32m+[m[32m  Darwin* )[m[41m[m
+[32m+[m[32m    darwin=true[m[41m[m
+[32m+[m[32m    ;;[m[41m[m
+[32m+[m[32m  MINGW* )[m[41m[m
+[32m+[m[32m    msys=true[m[41m[m
+[32m+[m[32m    ;;[m[41m[m
+[32m+[m[32m  NONSTOP* )[m[41m[m
+[32m+[m[32m    nonstop=true[m[41m[m
+[32m+[m[32m    ;;[m[41m[m
+[32m+[m[32mesac[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mCLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Determine the Java command to use to start the JVM.[m[41m[m
+[32m+[m[32mif [ -n "$JAVA_HOME" ] ; then[m[41m[m
+[32m+[m[32m    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then[m[41m[m
+[32m+[m[32m        # IBM's JDK on AIX uses strange locations for the executables[m[41m[m
+[32m+[m[32m        JAVACMD="$JAVA_HOME/jre/sh/java"[m[41m[m
+[32m+[m[32m    else[m[41m[m
+[32m+[m[32m        JAVACMD="$JAVA_HOME/bin/java"[m[41m[m
+[32m+[m[32m    fi[m[41m[m
+[32m+[m[32m    if [ ! -x "$JAVACMD" ] ; then[m[41m[m
+[32m+[m[32m        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mPlease set the JAVA_HOME variable in your environment to match the[m[41m[m
+[32m+[m[32mlocation of your Java installation."[m[41m[m
+[32m+[m[32m    fi[m[41m[m
+[32m+[m[32melse[m[41m[m
+[32m+[m[32m    JAVACMD="java"[m[41m[m
+[32m+[m[32m    which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mPlease set the JAVA_HOME variable in your environment to match the[m[41m[m
+[32m+[m[32mlocation of your Java installation."[m[41m[m
+[32m+[m[32mfi[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Increase the maximum file descriptors if we can.[m[41m[m
+[32m+[m[32mif [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then[m[41m[m
+[32m+[m[32m    MAX_FD_LIMIT=`ulimit -H -n`[m[41m[m
+[32m+[m[32m    if [ $? -eq 0 ] ; then[m[41m[m
+[32m+[m[32m        if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then[m[41m[m
+[32m+[m[32m            MAX_FD="$MAX_FD_LIMIT"[m[41m[m
+[32m+[m[32m        fi[m[41m[m
+[32m+[m[32m        ulimit -n $MAX_FD[m[41m[m
+[32m+[m[32m        if [ $? -ne 0 ] ; then[m[41m[m
+[32m+[m[32m            warn "Could not set maximum file descriptor limit: $MAX_FD"[m[41m[m
+[32m+[m[32m        fi[m[41m[m
+[32m+[m[32m    else[m[41m[m
+[32m+[m[32m        warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"[m[41m[m
+[32m+[m[32m    fi[m[41m[m
+[32m+[m[32mfi[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# For Darwin, add options to specify how the application appears in the dock[m[41m[m
+[32m+[m[32mif $darwin; then[m[41m[m
+[32m+[m[32m    GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""[m[41m[m
+[32m+[m[32mfi[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# For Cygwin, switch paths to Windows format before running java[m[41m[m
+[32m+[m[32mif $cygwin ; then[m[41m[m
+[32m+[m[32m    APP_HOME=`cygpath --path --mixed "$APP_HOME"`[m[41m[m
+[32m+[m[32m    CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`[m[41m[m
+[32m+[m[32m    JAVACMD=`cygpath --unix "$JAVACMD"`[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    # We build the pattern for arguments to be converted via cygpath[m[41m[m
+[32m+[m[32m    ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`[m[41m[m
+[32m+[m[32m    SEP=""[m[41m[m
+[32m+[m[32m    for dir in $ROOTDIRSRAW ; do[m[41m[m
+[32m+[m[32m        ROOTDIRS="$ROOTDIRS$SEP$dir"[m[41m[m
+[32m+[m[32m        SEP="|"[m[41m[m
+[32m+[m[32m    done[m[41m[m
+[32m+[m[32m    OURCYGPATTERN="(^($ROOTDIRS))"[m[41m[m
+[32m+[m[32m    # Add a user-defined pattern to the cygpath arguments[m[41m[m
+[32m+[m[32m    if [ "$GRADLE_CYGPATTERN" != "" ] ; then[m[41m[m
+[32m+[m[32m        OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"[m[41m[m
+[32m+[m[32m    fi[m[41m[m
+[32m+[m[32m    # Now convert the arguments - kludge to limit ourselves to /bin/sh[m[41m[m
+[32m+[m[32m    i=0[m[41m[m
+[32m+[m[32m    for arg in "$@" ; do[m[41m[m
+[32m+[m[32m        CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`[m[41m[m
+[32m+[m[32m        CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition[m[41m[m
+[32m+[m[32m            eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`[m[41m[m
+[32m+[m[32m        else[m[41m[m
+[32m+[m[32m            eval `echo args$i`="\"$arg\""[m[41m[m
+[32m+[m[32m        fi[m[41m[m
+[32m+[m[32m        i=$((i+1))[m[41m[m
+[32m+[m[32m    done[m[41m[m
+[32m+[m[32m    case $i in[m[41m[m
+[32m+[m[32m        (0) set -- ;;[m[41m[m
+[32m+[m[32m        (1) set -- "$args0" ;;[m[41m[m
+[32m+[m[32m        (2) set -- "$args0" "$args1" ;;[m[41m[m
+[32m+[m[32m        (3) set -- "$args0" "$args1" "$args2" ;;[m[41m[m
+[32m+[m[32m        (4) set -- "$args0" "$args1" "$args2" "$args3" ;;[m[41m[m
+[32m+[m[32m        (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;[m[41m[m
+[32m+[m[32m        (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;[m[41m[m
+[32m+[m[32m        (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;[m[41m[m
+[32m+[m[32m        (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;[m[41m[m
+[32m+[m[32m        (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;[m[41m[m
+[32m+[m[32m    esac[m[41m[m
+[32m+[m[32mfi[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Escape application args[m[41m[m
+[32m+[m[32msave () {[m[41m[m
+[32m+[m[32m    for i do printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/" ; done[m[41m[m
+[32m+[m[32m    echo " "[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[32mAPP_ARGS=$(save "$@")[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Collect all arguments for the java command, following the shell quoting and substitution rules[m[41m[m
+[32m+[m[32meval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "\"-Dorg.gradle.appname=$APP_BASE_NAME\"" -classpath "\"$CLASSPATH\"" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# by default we should be in the correct project dir, but when run from Finder on Mac, the cwd is wrong[m[41m[m
+[32m+[m[32mif [ "$(uname)" = "Darwin" ] && [ "$HOME" = "$PWD" ]; then[m[41m[m
+[32m+[m[32m  cd "$(dirname "$0")"[m[41m[m
+[32m+[m[32mfi[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mexec "$JAVACMD" "$@"[m[41m[m
+[1mdiff --git a/settings.gradle b/settings.gradle[m
+[1mindex b47b018..37c14d5 100644[m
+[1m--- a/settings.gradle[m
+[1m+++ b/settings.gradle[m
+[36m@@ -1,2 +1,2 @@[m
+[31m-include ':app'[m
+[31m-rootProject.name='Candor365'[m
+[32m+[m[32minclude ':app'[m[41m[m
+[32m+[m[32mrootProject.name='Candor365'[m[41m[m
