@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -39,7 +41,7 @@ public class CalendarActivity extends AppCompatActivity {
     }
     @NonNull
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
-        return new Intent().setClass(context, SignedInActivity.class)
+        return new Intent().setClass(context, CalendarActivity.class)
                 .putExtra(ExtraConstants.IDP_RESPONSE, response);
     }
 }
