@@ -6,4 +6,7 @@
     <string name="phone">Phone #</string>
     <string name="title_activity_shop">ShopActivity</string>
     <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="no_internet_connection">Could not connect to Internet</string>
+    <string name="sign_in_cancelled">Signin attempt cancelled</string>
+    <string name="unknown_error">Unknown Error</string>
 </resources>
