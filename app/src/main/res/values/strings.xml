@@ -5,4 +5,5 @@
     <string name="name">Name</string>
     <string name="phone">Phone #</string>
     <string name="title_activity_shop">ShopActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
 </resources>
