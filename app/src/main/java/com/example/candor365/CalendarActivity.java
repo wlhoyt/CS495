@@ -2,6 +2,8 @@ package com.example.candor365;
 
 //import android.content.Context;
 //import android.content.Intent;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 /*
@@ -20,26 +22,32 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.provider.CalendarContract;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class CalendarActivity extends AppCompatActivity {
+    private Button backButton;
 
+    private View.OnClickListener backButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            backButtonClicked();
+        }
+    };
+
+    private void backButtonClicked(){
+        startActivity(new Intent(CalendarActivity.this, SignedInActivity.class));
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        backButton = (Button) findViewById(R.id.backButton);
+        backButton.setOnClickListener(backButtonListener);
     }
 
 }
