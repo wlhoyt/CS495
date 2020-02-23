@@ -23,12 +23,15 @@ import androidx.appcompat.widget.Toolbar;
 import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class CalendarActivity extends AppCompatActivity {
     private Button backButton;
+    private Button addEventButton;
+    private CalendarView eventCalendar;
 
     private View.OnClickListener backButtonListener = new View.OnClickListener() {
         @Override
@@ -36,6 +39,15 @@ public class CalendarActivity extends AppCompatActivity {
             backButtonClicked();
         }
     };
+    private View.OnClickListener addEventListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View e){
+            addEventClicked();
+        }
+    };
+    private void addEventClicked(){
+        startActivity(new Intent(CalendarActivity.this, addCalenderEvent.class));
+    }
 
     private void backButtonClicked(){
         startActivity(new Intent(CalendarActivity.this, SignedInActivity.class));
@@ -48,6 +60,8 @@ public class CalendarActivity extends AppCompatActivity {
 
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(backButtonListener);
+        addEventButton = (Button) findViewById(R.id.add_event_button);
+        addEventButton.setOnClickListener(addEventListener);
     }
 
 }
