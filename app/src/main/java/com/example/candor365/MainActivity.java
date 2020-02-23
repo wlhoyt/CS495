@@ -48,22 +48,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if(nfcAdapter != null && nfcAdapter.isEnabled())
-        {
-            Toast.makeText(this,"NFC available!", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            Toast.makeText(this,"NFC not available!", Toast.LENGTH_LONG).show();
-        }
-
     }
 
     // [START on_start_check_user]
     @Override
     public void onStart() {
         super.onStart();
+        startActivity(NFC_Reading.createIntent(this,null));
+        /*
         if (mAuth.getCurrentUser() != null) {
             //signed in
             Toast.makeText(getApplicationContext(),"Already Signed In", Toast.LENGTH_SHORT).show();
@@ -75,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build())).build(),
                     RC_SIGN_IN);
         }
+        */
     }
 
     @Override

@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-        <activity android:name=".NFC_ReadingActivity">
+        <activity android:name=".NFC_Reading">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
