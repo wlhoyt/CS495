@@ -2,29 +2,25 @@ package com.example.candor365;
 
 
 
-import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Database {
+class Database {
 
-    private static Firestore db=null;
+    private static FirebaseFirestore db=null;
 
-    public static void initializeDb() {
-       db = FirestoreClient.getFirestore();
+    static void initializeDb() {
+
+        db = FirebaseFirestore.getInstance();
     }
 
-    public static void writeClassDb(Map docData, String docKey){
-        db.collection("classes").document(docKey).set(docData);
+    static void writeClassDb(Map docData, String eventTitle){
+        db.collection("classes").document(eventTitle).collection(eventTitle + "data").document("ClassInfo").set(docData);
         //need error checking
     }
 

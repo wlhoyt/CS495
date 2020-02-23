@@ -70,7 +70,6 @@ public class SignedInActivity extends AppCompatActivity {
         docData.put("name","test");
         docData.put("stuff", "test");
 
-        Database.writeClassDb(docData, "test");
     }
 
     @NonNull
