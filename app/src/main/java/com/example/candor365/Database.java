@@ -13,6 +13,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Database {
 
@@ -22,8 +23,8 @@ public class Database {
        db = FirestoreClient.getFirestore();
     }
 
-    public static void writeClassDb(HashMap docData){
-        db.collection("classes").document("testing").set(docData);
+    public static void writeClassDb(Map docData, String docKey){
+        db.collection("classes").document(docKey).set(docData);
         //need error checking
     }
 

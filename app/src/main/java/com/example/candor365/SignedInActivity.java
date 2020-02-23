@@ -39,6 +39,8 @@ import androidx.annotation.Nullable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SignedInActivity extends AppCompatActivity {
@@ -63,17 +65,18 @@ public class SignedInActivity extends AppCompatActivity {
         viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
         viewScheduleButton.setOnClickListener(viewScheduleListener);
         Database.initializeDb();
+
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("name","test");
+        docData.put("stuff", "test");
+
+        Database.writeClassDb(docData, "test");
     }
 
     @NonNull
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
         return new Intent().setClass(context, SignedInActivity.class)
                 .putExtra(ExtraConstants.IDP_RESPONSE, response);
-    }
-
-    private void initializeFireStore(){
-
-
     }
 
     private void signoutClicked() {
