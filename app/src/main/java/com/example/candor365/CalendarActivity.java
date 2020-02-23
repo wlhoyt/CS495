@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class CalendarActivity extends AppCompatActivity {
     private Button backButton;
     private Button addEventButton;
-    private CalendarView eventCalendar;
+    private CalendarView eventCalendar = findViewById(R.id.calendar_view);
 
     private View.OnClickListener backButtonListener = new View.OnClickListener() {
         @Override

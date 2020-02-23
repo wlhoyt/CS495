@@ -10,15 +10,16 @@
     <TextView
         android:id="@+id/event_name"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:text="Event Name" />
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text="@string/event_name" />
 
     <EditText
         android:id="@+id/event_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date|datetime" />
 
     <EditText
         android:id="@+id/event_time"
@@ -26,4 +27,5 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="time" />
+
 </LinearLayout>
