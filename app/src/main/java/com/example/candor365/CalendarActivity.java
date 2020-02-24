@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 */
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,7 +25,10 @@ import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -32,6 +36,7 @@ public class CalendarActivity extends AppCompatActivity {
     private Button backButton;
     private Button addEventButton;
     private CalendarView eventCalendar;
+    private TextView classView;
 
     private View.OnClickListener backButtonListener = new View.OnClickListener() {
         @Override
@@ -45,6 +50,7 @@ public class CalendarActivity extends AppCompatActivity {
             addEventClicked();
         }
     };
+
     private void addEventClicked(){
         startActivity(new Intent(CalendarActivity.this, addCalenderEvent.class));
     }
@@ -58,10 +64,21 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        eventCalendar = (CalendarView) findViewById(R.id.calendar_view);
+
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(backButtonListener);
         addEventButton = (Button) findViewById(R.id.add_event_button);
         addEventButton.setOnClickListener(addEventListener);
+
+        classView = (TextView) findViewById(R.id.classEvent);
+
+        eventCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+
+            }
+        });
     }
 
 }
