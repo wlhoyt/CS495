@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        startActivity(NFC_Reading.createIntent(this,null));
-        /*
+
         if (mAuth.getCurrentUser() != null) {
             //signed in
             Toast.makeText(getApplicationContext(),"Already Signed In", Toast.LENGTH_SHORT).show();
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build())).build(),
                     RC_SIGN_IN);
         }
-        */
+
     }
 
     @Override

@@ -31,6 +31,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +55,7 @@ import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
 
 public class SignedInActivity extends AppCompatActivity {
     private Button signoutButton;
+    private Button classSignInButton;
 
     private View.OnClickListener signoutListener = new View.OnClickListener() {
         @Override
@@ -76,6 +78,17 @@ public class SignedInActivity extends AppCompatActivity {
 
     }
 
+    private View.OnClickListener attendanceListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            attendanceClick();
+        }
+    };
+    public void attendanceClick()
+    {
+        startActivity(NFC_Reading.createIntent(this,null));
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +96,8 @@ public class SignedInActivity extends AppCompatActivity {
         setContentView(R.layout.signedin_activity);
         signoutButton = (Button) findViewById(R.id.sign_out);
         signoutButton.setOnClickListener(signoutListener);
+        classSignInButton = (Button) findViewById(R.id.class_sign_in);
+        classSignInButton.setOnClickListener(attendanceListener);
     }
     @NonNull
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {

@@ -31,8 +31,9 @@ import java.util.Locale;
 
 public class NFC_Reading extends AppCompatActivity {
     NfcAdapter nfcAdapter;
-    ToggleButton tglReadWrite;
     EditText txtTagContent;
+    //    ToggleButton tglReadWrite;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,8 +41,8 @@ public class NFC_Reading extends AppCompatActivity {
         setContentView(R.layout.nfc_reading_activity);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        tglReadWrite = (ToggleButton) findViewById(R.id.tglReadWrite);
         txtTagContent = (EditText) findViewById(R.id.txtTagContent);
+        //  tglReadWrite = (ToggleButton) findViewById(R.id.tglReadWrite);
 
     }
 
@@ -52,8 +53,20 @@ public class NFC_Reading extends AppCompatActivity {
 
         if(intent.hasExtra(NfcAdapter.EXTRA_TAG))
         {
-            Toast.makeText(this,"NFC intent received!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"NFC intent received!",Toast.LENGTH_SHORT).show();
 
+            Parcelable [] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+
+            if(parcelables != null && parcelables.length > 0 )
+            {
+                readTextFromMessage((NdefMessage) parcelables[0]);
+            }
+            else
+            {
+                Toast.makeText(this,"No NDEF Message",Toast.LENGTH_LONG).show();
+            }
+
+            /*
             if(tglReadWrite.isChecked())
             {
                 Parcelable [] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
@@ -74,6 +87,8 @@ public class NFC_Reading extends AppCompatActivity {
                 writeNdefMessage(tag, ndefMessage);
 
             }
+            */
+
         }
     }
 
@@ -126,6 +141,7 @@ public class NFC_Reading extends AppCompatActivity {
         nfcAdapter.disableForegroundDispatch(this);
     }
 
+    /*
     private void formatTag(Tag tag, NdefMessage ndefMessage)
     {
         try
@@ -149,7 +165,9 @@ public class NFC_Reading extends AppCompatActivity {
             Log.e("FormatTag", e.getMessage());
         }
     }
+    */
 
+    /*
     private void writeNdefMessage(Tag tag, NdefMessage ndefMessage)
     {
         try
@@ -185,7 +203,9 @@ public class NFC_Reading extends AppCompatActivity {
             Log.e("writeNdefMessage",e.getMessage());
         }
     }
+    */
 
+    /*
     private NdefRecord createTextRecord(String content)
     {
         try
@@ -210,7 +230,9 @@ public class NFC_Reading extends AppCompatActivity {
         }
         return null;
     }
+    */
 
+    /*
     private NdefMessage createNdefMessage(String content)
     {
         NdefRecord ndefRecord = createTextRecord(content);
@@ -219,11 +241,14 @@ public class NFC_Reading extends AppCompatActivity {
 
         return ndefMessage;
     }
+    */
 
+    /*
     public void tglReadWriteOnClick(View view)
     {
         txtTagContent.setText("");
     }
+    */
 
     public String getTextFromNdefRecord(NdefRecord ndefRecord)
     {
