@@ -68,7 +68,7 @@ public class NFC_Reading extends AppCompatActivity {
             }
             else
             {
-                Toast.makeText(this,"No NDEF Message",Toast.LENGTH_LONG).show();
+               // Toast.makeText(this,"No NDEF Message",Toast.LENGTH_LONG).show();
             }
 
             /*
@@ -110,7 +110,7 @@ public class NFC_Reading extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this,"No NDEF records found!",Toast.LENGTH_LONG).show();
+           // Toast.makeText(this,"No NDEF records found!",Toast.LENGTH_LONG).show();
         }
     }
 
