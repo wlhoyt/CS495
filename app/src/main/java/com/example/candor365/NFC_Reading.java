@@ -27,6 +27,8 @@ import androidx.annotation.NonNull;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -276,6 +278,5 @@ public class NFC_Reading extends AppCompatActivity {
         String username = acct.getDisplayName();
 
     }
-    db = FirebaseFirestore.getInstance();
 
 }
