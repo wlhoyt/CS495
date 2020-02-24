@@ -53,4 +53,25 @@ class Database {
                 });
         return data;
     }
+
+    static Map readClassDb(){
+
+
+        db.collection("classesByDate").document("1-25-2020").collection("6:30").document("ClassInfo")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            data = task.getResult().getData();
+                            if (data!=null)
+                                Log.d(TAG, "Document data => " + data.toString());
+
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        return data;
+    }
 }

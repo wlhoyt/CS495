@@ -29,10 +29,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
+import java.util.Map;
 
 public class NFC_Reading extends AppCompatActivity {
     NfcAdapter nfcAdapter;
@@ -274,9 +276,15 @@ public class NFC_Reading extends AppCompatActivity {
         return tagContent;
     }
     public void attendanceChecker (String nfc_tag){
+        static String TAG= "attendanceChecker"
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         String username = acct.getDisplayName();
+        Map <String,Object> name = Database.readClassDb();
+
+        Log.d(TAG, "NFCId from Database read => " + name.get("nfcId"));
+
 
     }
+
 
 }
