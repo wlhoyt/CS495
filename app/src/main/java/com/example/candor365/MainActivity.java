@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     // [START on_start_check_user]
@@ -75,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
             //signed in
             Toast.makeText(getApplicationContext(),"Already Signed In", Toast.LENGTH_SHORT).show();
             startActivity(SignedInActivity.createIntent(this, null));
+        } else {
+            // not signed in
+            startActivityForResult(
+                    // Get an instance of AuthUI based on the default app
+                    AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build())).build(),
+                    RC_SIGN_IN);
         }
     }
 
