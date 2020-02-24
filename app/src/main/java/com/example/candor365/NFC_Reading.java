@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -53,7 +55,7 @@ public class NFC_Reading extends AppCompatActivity {
 
         if(intent.hasExtra(NfcAdapter.EXTRA_TAG))
         {
-            Toast.makeText(this,"NFC intent received!",Toast.LENGTH_SHORT).show();
+
 
             Parcelable [] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 
@@ -100,6 +102,8 @@ public class NFC_Reading extends AppCompatActivity {
             NdefRecord ndefRecord = ndefRecords[0];
             String tagContent = getTextFromNdefRecord(ndefRecord);
             txtTagContent.setText(tagContent);
+            attendanceChecker(tagContent);
+
         }
         else
         {
@@ -266,4 +270,12 @@ public class NFC_Reading extends AppCompatActivity {
         }
         return tagContent;
     }
+    public void attendanceChecker (String nfc_tag){
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        String username = acct.getDisplayName();
+
+    }
+
+
+
 }
