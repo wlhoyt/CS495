@@ -22,21 +22,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.provider.CalendarContract;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
+import java.util.Map;
+
+import static java.lang.Thread.sleep;
 
 public class CalendarActivity extends AppCompatActivity {
     private Button backButton;
     private Button addEventButton;
     private CalendarView eventCalendar;
     private TextView classView;
+    static String TAG = "Calendar Activity";
 
     private View.OnClickListener backButtonListener = new View.OnClickListener() {
         @Override
@@ -71,14 +75,27 @@ public class CalendarActivity extends AppCompatActivity {
         addEventButton = (Button) findViewById(R.id.add_event_button);
         addEventButton.setOnClickListener(addEventListener);
 
-        classView = (TextView) findViewById(R.id.classEvent);
+
 
         eventCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                classView = (TextView) findViewById(R.id.classEvent);
+                String date = month + "-" + dayOfMonth + "-" + year;
+                classView.setText("");
+                Map data = Database.readClassDb(date);
+
+                if (data != null) {
+                    Log.d(TAG, "Data has been populated");
+                    classView.setText(data.toString());
+                }
+                else {
+                    Log.w(TAG, "Could not read Database");
+                }
 
             }
         });
+        //Database.readClassDb("danielsClass");
     }
 
 }

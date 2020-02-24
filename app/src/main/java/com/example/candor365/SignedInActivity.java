@@ -31,26 +31,17 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FacebookAuthProvider;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.UserInfo;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class SignedInActivity extends AppCompatActivity {
     private Button signoutButton;
@@ -62,6 +53,30 @@ public class SignedInActivity extends AppCompatActivity {
                 signoutClicked();
         }
     };
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.signedin_activity);
+        signoutButton = (Button) findViewById(R.id.sign_out);
+        signoutButton.setOnClickListener(signoutListener);
+
+        viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
+        viewScheduleButton.setOnClickListener(viewScheduleListener);
+        Database.initializeDb();
+
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("name","test");
+        docData.put("stuff", "test");
+
+    }
+
+    @NonNull
+    public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
+        return new Intent().setClass(context, SignedInActivity.class)
+                .putExtra(ExtraConstants.IDP_RESPONSE, response);
+    }
 
     private void signoutClicked() {
         AuthUI.getInstance()
@@ -87,22 +102,5 @@ public class SignedInActivity extends AppCompatActivity {
     private void viewScheduleClicked(){
         startActivity(new Intent(SignedInActivity.this, CalendarActivity.class));
         finish();
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signedin_activity);
-        signoutButton = (Button) findViewById(R.id.sign_out);
-        signoutButton.setOnClickListener(signoutListener);
-
-        viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
-        viewScheduleButton.setOnClickListener(viewScheduleListener);
-    }
-    @NonNull
-    public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
-        return new Intent().setClass(context, SignedInActivity.class)
-                .putExtra(ExtraConstants.IDP_RESPONSE, response);
     }
 }
