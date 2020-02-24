@@ -11,29 +11,8 @@
 
 Remaining tasks for Sprint one
 ---
+* Future Designing for Database 
+* PowerPoint Revision
 
-* Daniel - Will work on reading the "Event" from the database onto the calendar
-* Will - Getting the NFC information (tag or serial number) on the app and then compare the that information to the event on the 
-database then writing the name of the user to the database
-* Josh - Populate the server with the event for testing 
-* Jason - Help with setting up the structure for the database for future work, flesh out the app for demo on tuesday
 
 ---
-
-* User:
-  * Number
-    * First
-    * Last
-    * Email
-  
-* Event
-  * Number
-    * Preregister
-      * UserName
-    * Attendance
-      * NFC Tag Id
-      * UserName
-    
- ^ current status of the database
- - What needs to happen is it needs to be populated
- - Future structures need to be thought about
