@@ -82,7 +82,7 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 classView = (TextView) findViewById(R.id.classEvent);
-                String date = month + "-" + dayOfMonth + "-" + year;
+                String date = year + ""+ (month+1) + dayOfMonth;
                 classView.setText("");
                 Map data = Database.readClassDb(date);
 

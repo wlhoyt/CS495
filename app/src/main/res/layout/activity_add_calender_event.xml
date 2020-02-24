@@ -41,4 +41,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="TESTING TO SEE IF EMULATOR FINDS THIS" />
+
+    <Button
+        android:id="@+id/save_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Event" />
+
 </LinearLayout>
