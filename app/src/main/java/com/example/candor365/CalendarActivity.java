@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class CalendarActivity extends AppCompatActivity {
     private Button backButton;
     private Button addEventButton;
-    private CalendarView eventCalendar = findViewById(R.id.calendar_view);
+    //private CalendarView eventCalendar = findViewById(R.id.calendar_view);
 
     private View.OnClickListener backButtonListener = new View.OnClickListener() {
         @Override
@@ -62,6 +62,7 @@ public class CalendarActivity extends AppCompatActivity {
         backButton.setOnClickListener(backButtonListener);
         addEventButton = (Button) findViewById(R.id.add_event_button);
         addEventButton.setOnClickListener(addEventListener);
+        Database.readClassDb("danielsClass");
     }
 
 }
