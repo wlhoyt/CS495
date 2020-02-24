@@ -28,8 +28,8 @@ class Database {
         db = FirebaseFirestore.getInstance();
     }
 
-    static void writeClassDb(Map docData, String eventTitle){
-        db.collection("classes").document(eventTitle).collection(eventTitle + "data").document("ClassInfo").set(docData);
+    static void writeClassDb(Map docData, String date){
+        db.collection("classesByDate").document(date).collection("6:30").document("ClassInfo").set(docData);
         //need error checking
     }
 

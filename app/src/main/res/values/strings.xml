@@ -14,4 +14,6 @@
     <string name="add_event">Add Event</string>
     <string name="view_events">View Events</string>
     <string name="event_name">Event Name</string>
+    <string name="event_date">Event Date</string>
+    <string name="event_description">Event Description</string>
 </resources>
