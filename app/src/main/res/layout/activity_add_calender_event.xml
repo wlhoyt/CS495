@@ -7,23 +7,45 @@
     android:orientation="vertical"
     tools:context=".addCalenderEvent" >
 
-    <TextView
+    <EditText
         android:id="@+id/event_name"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:text="Event Name" />
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textShortMessage|text"
+        android:text="@string/event_name"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/event_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date|datetime"
+        android:text="@string/event_date"
+        android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/event_time"
+        android:id="@+id/event_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="time" />
+        android:inputType="textShortMessage"
+        android:text="@string/event_description"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/event_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="TESTING TO SEE IF EMULATOR FINDS THIS" />
+
+    <Button
+        android:id="@+id/save_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Event" />
+
 </LinearLayout>

@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "1028162196284-rtm0bpttan1mvvnp948mh4e53hcvp2i6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.candor365",
+            "certificate_hash": "ba77ffcd8a4c871210c0a893633908e3546333bb"
+          }
+        },
+        {
           "client_id": "1028162196284-ofbq0lcvo5lr2qe6c4t3820bm4pn9dem.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
