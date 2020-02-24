@@ -42,6 +42,21 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 472;
     @BindView(android.R.id.content) View mRootView;
+
+    private Button googleSignInButton;
+
+    private View.OnClickListener googleSignInListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            googleSignInButtonClicked();
+        }
+    };
+
+    private void googleSignInButtonClicked(){
+        signIn();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
+        googleSignInButton = (Button) findViewById(R.id.googleSignInButton);
+        googleSignInButton.setOnClickListener(googleSignInListener);
         if (mAuth.getCurrentUser() != null) {
             //signed in
             Toast.makeText(getApplicationContext(),"Already Signed In", Toast.LENGTH_SHORT).show();
@@ -66,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build())).build(),
                     RC_SIGN_IN);
         }
-
     }
 
     @Override
@@ -108,5 +123,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void showSnackbar(@StringRes int errorMessageRes) {
         Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
+    }
+
+    private void signIn(){
+        startActivityForResult(
+                // Get an instance of AuthUI based on the default app
+                AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build())).build(),
+                RC_SIGN_IN);
     }
 }
