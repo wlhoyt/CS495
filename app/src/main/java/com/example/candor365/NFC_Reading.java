@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
@@ -275,7 +276,6 @@ public class NFC_Reading extends AppCompatActivity {
         String username = acct.getDisplayName();
 
     }
-
-
+    db = FirebaseFirestore.getInstance();
 
 }
