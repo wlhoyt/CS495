@@ -11,4 +11,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="view_schedule">View Schedule</string>
     <string name="backButton">Back</string>
+    <string name="add_event">Add Event</string>
+    <string name="view_events">View Events</string>
+    <string name="event_name">Event Name</string>
 </resources>
