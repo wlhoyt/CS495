@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.protobuf.Api;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,8 @@ class Database {
     }
 
     static Map readClassDb(final String date){
+
+
         db.collection("classesByDate").document(date).collection("6:30").document("ClassInfo")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
