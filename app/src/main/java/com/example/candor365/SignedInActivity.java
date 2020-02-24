@@ -31,7 +31,6 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +39,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,7 +57,7 @@ import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
 public class SignedInActivity extends AppCompatActivity {
     private Button signoutButton;
     private Button classSignInButton;
-
+    private Button viewScheduleButton;
     private View.OnClickListener signoutListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -64,18 +65,24 @@ public class SignedInActivity extends AppCompatActivity {
         }
     };
 
-    public void signoutClicked() {
-        AuthUI.getInstance()
-                .signOut(this)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // user is now signed out
-                        Toast.makeText(SignedInActivity.this, "USER SIGNED OUT", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignedInActivity.this, MainActivity.class));
-                        finish();
-                    }
-                });
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.signedin_activity);
+        signoutButton = (Button) findViewById(R.id.sign_out);
+        signoutButton.setOnClickListener(signoutListener);
+
+
+        viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
+        viewScheduleButton.setOnClickListener(viewScheduleListener);
+        Database.initializeDb();
+
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("name","test");
+        docData.put("stuff", "test");
+        classSignInButton = (Button) findViewById(R.id.class_sign_in);
+        classSignInButton.setOnClickListener(attendanceListener);
     }
 
     private View.OnClickListener attendanceListener = new View.OnClickListener() {
@@ -90,18 +97,35 @@ public class SignedInActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signedin_activity);
-        signoutButton = (Button) findViewById(R.id.sign_out);
-        signoutButton.setOnClickListener(signoutListener);
-        classSignInButton = (Button) findViewById(R.id.class_sign_in);
-        classSignInButton.setOnClickListener(attendanceListener);
-    }
     @NonNull
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
         return new Intent().setClass(context, SignedInActivity.class)
                 .putExtra(ExtraConstants.IDP_RESPONSE, response);
+    }
+
+    private void signoutClicked() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // user is now signed out
+                        Toast.makeText(SignedInActivity.this, "USER SIGNED OUT", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignedInActivity.this, MainActivity.class));
+                        finish();
+                    }
+                });
+
+    }
+
+    private View.OnClickListener viewScheduleListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            viewScheduleClicked();
+        }
+    };
+
+    private void viewScheduleClicked(){
+        startActivity(new Intent(SignedInActivity.this, CalendarActivity.class));
+        finish();
     }
 }
