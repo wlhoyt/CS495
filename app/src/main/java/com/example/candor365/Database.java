@@ -3,9 +3,12 @@ package com.example.candor365;
 
 
 
+import android.nfc.NfcAdapter;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,6 +27,8 @@ class Database {
     private static FirebaseFirestore db=null;
     private static Map data;
 
+
+
     static void initializeDb() {
         db = FirebaseFirestore.getInstance();
     }
@@ -33,24 +38,25 @@ class Database {
         //need error checking
     }
 
-    static Map readClassDb(final String date){
+    static void readClassDb(final String date, final readCallBack reader){
 
 
         db.collection("classesByDate").document(date).collection("6:30").document("ClassInfo")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            data = task.getResult().getData();
-                            if (data!=null)
-                                Log.d(TAG, "Document data => " + data.toString());
-
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map data = documentSnapshot.getData();
+                        if (data != null)
+                            Log.d(TAG, "Document data => " + data.toString());
+                        reader.onCallBack(data);
                     }
-                });
-        return data;
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Map emptyData=null;
+                reader.onCallBack(emptyData);
+            }
+        });
     }
 }
