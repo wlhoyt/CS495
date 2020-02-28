@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "1028162196284-5qf5askrrm5g2tc9b078c0npuhcrls5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.candor365",
+            "certificate_hash": "80478722a67adc5186a196ec7a87de995f9eb40a"
+          }
+        },
+        {
           "client_id": "1028162196284-s2gg1f6oidvhbmhojgj78hmq7g3n0kap.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.candor365",
             "certificate_hash": "607d5111615355fe0497a5653e7f238bcda378a4"
-          }
-        },
-        {
-          "client_id": "1028162196284-rtm0bpttan1mvvnp948mh4e53hcvp2i6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.candor365",
-            "certificate_hash": "ba77ffcd8a4c871210c0a893633908e3546333bb"
           }
         },
         {
@@ -76,7 +76,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1028162196284-8ub0pk8lu2hc8o7ueouq2ocj3ofmjvvo.apps.googleusercontent.com",
+              "client_id": "1028162196284-reddp8g0r3tma01dotig3h4fallu6bgi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

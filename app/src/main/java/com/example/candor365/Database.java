@@ -59,4 +59,47 @@ class Database {
             }
         });
     }
+    //This method reads a specific item from a specific category from the respective parameters
+    static void readShopDb(final String category, final String item, final readCallBack reader){
+        db.collection("store").document("category").collection(category).document(item)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map Item = documentSnapshot.getData();
+                        if (Item != null){
+                            Log.d(TAG, "Item data => " + Item.toString());
+                        }
+                        reader.onCallBack(Item);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Map noItem = null;
+                reader.onCallBack(noItem);
+            }
+        });
+    }
+    //this method reads all items from a specific category
+//    static void readShopDb(final String category, final readCallBack reader){
+//        db.collection("store").document("category").collection(category).
+//                .get()
+//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                        Map Item = documentSnapshot.getData();
+//                        if (Item != null){
+//                            Log.d(TAG, "Item data => " + Item.toString());
+//                        }
+//                        reader.onCallBack(Item);
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Map noItem = null;
+//                reader.onCallBack(noItem);
+//            }
+//        });
+//    }
+
 }
