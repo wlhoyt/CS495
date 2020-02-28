@@ -84,15 +84,21 @@ public class CalendarActivity extends AppCompatActivity {
                 classView = (TextView) findViewById(R.id.classEvent);
                 String date = year + ""+ (month+1) + dayOfMonth;
                 classView.setText("");
-                Map data = Database.readClassDb(date);
-
-                if (data != null) {
-                    Log.d(TAG, "Data has been populated");
-                    classView.setText(data.toString());
-                }
-                else {
-                    Log.w(TAG, "Could not read Database");
-                }
+                Database.readClassDb(date, new readCallBack() {
+                    @Override
+                    public void onCallBack(Map dataMap) {
+                        if (dataMap!=null)
+                            classView.setText(dataMap.toString());
+                    }
+                });
+//
+//                if (data != null) {
+//                    Log.d(TAG, "Data has been populated");
+//                    classView.setText(data.toString());
+//                }
+//                else {
+//                    Log.w(TAG, "Could not read Database");
+//                }
 
             }
         });
