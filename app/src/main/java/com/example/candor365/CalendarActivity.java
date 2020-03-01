@@ -30,7 +30,9 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 
@@ -84,13 +86,20 @@ public class CalendarActivity extends AppCompatActivity {
                 classView = (TextView) findViewById(R.id.classEvent);
                 String date = year + ""+ (month+1) + dayOfMonth;
                 classView.setText("");
-                Database.readClassDb(date, new readCallBack() {
-                    @Override
-                    public void onCallBack(Map dataMap) {
-                        if (dataMap!=null)
-                            classView.setText(dataMap.toString());
-                    }
-                });
+                List<String> times = new ArrayList<>();
+                times.add("6:30");
+                times.add("7:30");
+                times.add("8:30");
+                for (String time : times) {
+                    Database.readClassDb(date, time, new readCallBack() {
+                        @Override
+                        public void onCallBack(Map dataMap) {
+                            if (dataMap != null)
+                                classView.append(dataMap.toString() + "\n");
+
+                        }
+                    });
+                }
 //
 //                if (data != null) {
 //                    Log.d(TAG, "Data has been populated");
