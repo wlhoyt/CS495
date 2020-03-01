@@ -67,8 +67,7 @@ public class NFC_Reading extends AppCompatActivity {
             NdefRecord ndefRecord = ndefRecords[0];
             String tagContent = getTextFromNdefRecord(ndefRecord);
 //            attendanceChecker(tagContent);
-            preregisterChecker(tagContent,"2020214","6:30");
-
+            preregisterChecker(tagContent);
         }
         else
         {
@@ -128,14 +127,16 @@ public class NFC_Reading extends AppCompatActivity {
         return tagContent;
     }
 
-    public void preregisterChecker(String nfc_tag, final String data, String time)
+    public void preregisterChecker(String nfc_tag)
     {
+        Database.initializeDb();
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         String username = acct.getDisplayName();
 //        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
 //        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
-
-        Database.readPreregisterDb(data, time, new readCallBack() {
+        String date = "2020214";
+        String time = "6:30";
+        Database.readClassDb(date, time, new readCallBack() {
             @Override
             public void onCallBack(Map dataMap) {
 
@@ -148,29 +149,32 @@ public class NFC_Reading extends AppCompatActivity {
                 else
                 {
                     Toast.makeText(NFC_Reading.this,"DataMap Not Working",Toast.LENGTH_SHORT).show();
+                    Log.d("NFC_READING","HERE THE FUCK I AM ---------------------------------------------------");
                 }
             }
         });
     }
 
-    public void attendanceChecker (String nfc_tag, final String data, String time)
-    {
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        String username = acct.getDisplayName();
-//        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
-
-        Database.initializeDb();
-        Database.readAttendanceDb(data, time, new readCallBack() {
-            @Override
-            public void onCallBack(Map dataMap) {
-                    if(dataMap == null)
-                    {
-                        Toast.makeText(NFC_Reading.this,"GOD DAM IT",Toast.LENGTH_SHORT).show();
-                    }
-            }
-        });
-        return;
-    }
+//    public void attendanceChecker (String nfc_tag)
+//    {
+//        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+//        String username = acct.getDisplayName();
+////        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+////        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
+//        String date = "2020214";
+//        String time = "6:30";
+//        Database.initializeDb();
+//        Database.readAttendanceDb(date, time, new readCallBack() {
+//            @Override
+//            public void onCallBack(Map dataMap) {
+//                    if(dataMap == null)
+//                    {
+//                        Toast.makeText(NFC_Reading.this,"GOD DAM IT",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//            }
+//        });
+//        return;
+//    }
 
 }
