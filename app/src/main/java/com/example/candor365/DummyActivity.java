@@ -17,12 +17,13 @@ public class DummyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dummy);
         shopList = (TextView) findViewById(R.id.shop_item);
+        shopList.setText("");
         Database.initializeDb();
-        Database.readShopDb("clothes", "t-shirt", new readCallBack() {
+        Database.readShopDb("clothes", new readCallBack() {
             @Override
             public void onCallBack(Map dataMap) {
                 if(dataMap != null){
-                    shopList.setText(dataMap.toString());
+                    shopList.append(dataMap.toString());
                 }
             }
         });

@@ -81,25 +81,23 @@ class Database {
         });
     }
     //this method reads all items from a specific category
-//    static void readShopDb(final String category, final readCallBack reader){
-//        db.collection("store").document("category").collection(category).
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        Map Item = documentSnapshot.getData();
-//                        if (Item != null){
-//                            Log.d(TAG, "Item data => " + Item.toString());
-//                        }
-//                        reader.onCallBack(Item);
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Map noItem = null;
-//                reader.onCallBack(noItem);
-//            }
-//        });
-//    }
+    static void readShopDb(final String category, final readCallBack reader){
+        db.collection("store").document("category").collection(category)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()){
+                                //print everything to the text view
+                                reader.onCallBack(document.getData());
+                            }
+                        }
+                        else{
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
 
 }
