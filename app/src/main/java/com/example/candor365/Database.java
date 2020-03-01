@@ -5,6 +5,7 @@ package com.example.candor365;
 
 import android.nfc.NfcAdapter;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +20,7 @@ import com.google.protobuf.Api;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 
@@ -98,6 +100,13 @@ class Database {
                         }
                     }
                 });
+    }
+    /*  This method takes in a HashMap of an item's name, price, and quantity
+    *   This method also takes in a category
+    */
+    static void addNewItem(Map item, String category){
+        final String item_name = (String) item.get("item_name");
+        db.collection("store").document("category").collection(category).document("shoes").set(item);
     }
 
 }
