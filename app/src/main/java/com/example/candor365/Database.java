@@ -5,6 +5,7 @@ package com.example.candor365;
 
 import android.nfc.NfcAdapter;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.protobuf.Api;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
@@ -38,10 +40,56 @@ class Database {
         //need error checking
     }
 
-    static void readClassDb(final String date, final readCallBack reader){
+    static void readClassDb(final String date, String time, final readCallBack reader){
 
 
-        db.collection("classesByDate").document(date).collection("6:30").document("ClassInfo")
+        db.collection("classesByDate").document(date).collection(time).document("ClassInfo")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map data = documentSnapshot.getData();
+                        if (data != null)
+                            Log.d(TAG, "Document data => " + data.toString());
+                        reader.onCallBack(data);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Map emptyData=null;
+                reader.onCallBack(emptyData);
+            }
+        });
+    }
+
+     static void readPreregisterDb(final String date, String time, final readCallBack reader){
+
+
+        db.collection("classesByDate").document(date).collection(time).document("Preregister")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map data = documentSnapshot.getData();
+                        if (data != null) {
+                            Log.d(TAG, "Document data => " + data.toString());
+                        }
+                        reader.onCallBack(data);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Map emptyData=null;
+                Log.d(TAG,"GOD FUCKING DAMMIT");
+                reader.onCallBack(emptyData);
+            }
+        });
+    }
+
+    static void readAttendanceDb(final String date, String time, final readCallBack reader){
+
+
+        db.collection("classesByDate").document(date).collection(time).document("Attendance")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override

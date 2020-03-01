@@ -7,37 +7,25 @@ import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.nfc.tech.Ndef;
-import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
 
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
-import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Locale;
+import java.util.Map;
 
 public class NFC_Reading extends AppCompatActivity {
     NfcAdapter nfcAdapter;
-    EditText txtTagContent;
-    //    ToggleButton tglReadWrite;
+    TextView testing;
 
 
     @Override
@@ -46,9 +34,7 @@ public class NFC_Reading extends AppCompatActivity {
         setContentView(R.layout.nfc_reading_activity);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        txtTagContent = (EditText) findViewById(R.id.txtTagContent);
-        //  tglReadWrite = (ToggleButton) findViewById(R.id.tglReadWrite);
-
+        testing = (TextView)findViewById(R.id.testing);
     }
 
     @Override
@@ -68,32 +54,8 @@ public class NFC_Reading extends AppCompatActivity {
             }
             else
             {
-               // Toast.makeText(this,"No NDEF Message",Toast.LENGTH_LONG).show();
+               Toast.makeText(this,"No NDEF Message",Toast.LENGTH_SHORT).show();
             }
-
-            /*
-            if(tglReadWrite.isChecked())
-            {
-                Parcelable [] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-
-                if(parcelables != null && parcelables.length > 0 )
-                {
-                    readTextFromMessage((NdefMessage) parcelables[0]);
-                }
-                else
-                {
-                    Toast.makeText(this,"No NDEF Message",Toast.LENGTH_LONG).show();
-                }
-            }
-            else
-            {
-                Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                NdefMessage ndefMessage =  createNdefMessage(txtTagContent.getText()+"");
-                writeNdefMessage(tag, ndefMessage);
-
-            }
-            */
-
         }
     }
 
@@ -104,13 +66,13 @@ public class NFC_Reading extends AppCompatActivity {
         {
             NdefRecord ndefRecord = ndefRecords[0];
             String tagContent = getTextFromNdefRecord(ndefRecord);
-            txtTagContent.setText(tagContent);
-            attendanceChecker(tagContent);
+//            attendanceChecker(tagContent);
+            preregisterChecker(tagContent,"2020214","6:30");
 
         }
         else
         {
-           // Toast.makeText(this,"No NDEF records found!",Toast.LENGTH_LONG).show();
+           Toast.makeText(this,"No NDEF records found!",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -129,7 +91,7 @@ public class NFC_Reading extends AppCompatActivity {
     }
 
     @NonNull
-    public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
+    public static Intent createIntent(@NonNull Context context) {
         return new Intent().setClass(context, NFC_Reading.class);
     }
 
@@ -148,114 +110,6 @@ public class NFC_Reading extends AppCompatActivity {
         nfcAdapter.disableForegroundDispatch(this);
     }
 
-    /*
-    private void formatTag(Tag tag, NdefMessage ndefMessage)
-    {
-        try
-        {
-            NdefFormatable ndefFormatable = NdefFormatable.get(tag);
-
-            if(ndefFormatable == null)
-            {
-                Toast.makeText(this,"Tag is not ndef formatable!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            ndefFormatable.connect();
-            ndefFormatable.format(ndefMessage);
-            ndefFormatable.close();
-
-            Toast.makeText(this, "Tag formatted", Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e)
-        {
-            Log.e("FormatTag", e.getMessage());
-        }
-    }
-    */
-
-    /*
-    private void writeNdefMessage(Tag tag, NdefMessage ndefMessage)
-    {
-        try
-        {
-            if(tag == null) {
-                Toast.makeText(this, "Tag object cannot be null", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Ndef ndef = Ndef.get(tag);
-
-            if(ndef == null)
-            {
-                // Format Tag with the ndef format and writes message
-                formatTag(tag,ndefMessage);
-            }
-            else
-            {
-                ndef.connect();
-                if(!ndef.isWritable())
-                {
-                    Toast.makeText(this, "Tag is not writable!", Toast.LENGTH_SHORT).show();
-                    ndef.close();
-                    return;
-                }
-                ndef.writeNdefMessage(ndefMessage);
-                ndef.close();
-
-                Toast.makeText(this, "Tag written", Toast.LENGTH_SHORT).show();
-            }
-        }
-        catch (Exception e)
-        {
-            Log.e("writeNdefMessage",e.getMessage());
-        }
-    }
-    */
-
-    /*
-    private NdefRecord createTextRecord(String content)
-    {
-        try
-        {
-            byte [] language;
-            language = Locale.getDefault().getLanguage().getBytes("UTF-8");
-
-            final byte[] text = content.getBytes("UTF-8");
-            final int languageSize = language.length;
-            final int textLength = text.length;
-            final ByteArrayOutputStream payload = new ByteArrayOutputStream(1 + languageSize + textLength);
-
-            payload.write((byte)(languageSize & 0x1F));
-            payload.write(language, 0, languageSize);
-            payload.write(text,0,textLength);
-
-            return new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], payload.toByteArray());
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            Log.e("CreateTextRecord",e.getMessage());
-        }
-        return null;
-    }
-    */
-
-    /*
-    private NdefMessage createNdefMessage(String content)
-    {
-        NdefRecord ndefRecord = createTextRecord(content);
-
-        NdefMessage ndefMessage = new NdefMessage(new NdefRecord[]{ ndefRecord });
-
-        return ndefMessage;
-    }
-    */
-
-    /*
-    public void tglReadWriteOnClick(View view)
-    {
-        txtTagContent.setText("");
-    }
-    */
 
     public String getTextFromNdefRecord(NdefRecord ndefRecord)
     {
@@ -273,10 +127,50 @@ public class NFC_Reading extends AppCompatActivity {
         }
         return tagContent;
     }
-    public void attendanceChecker (String nfc_tag){
+
+    public void preregisterChecker(String nfc_tag, final String data, String time)
+    {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         String username = acct.getDisplayName();
+//        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
 
+        Database.readPreregisterDb(data, time, new readCallBack() {
+            @Override
+            public void onCallBack(Map dataMap) {
+
+                if(dataMap != null)
+                {
+
+                    Toast.makeText(NFC_Reading.this, dataMap.toString() + "Harder", Toast.LENGTH_SHORT).show();
+                    testing.setText(dataMap.toString());
+                }
+                else
+                {
+                    Toast.makeText(NFC_Reading.this,"DataMap Not Working",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public void attendanceChecker (String nfc_tag, final String data, String time)
+    {
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        String username = acct.getDisplayName();
+//        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
+
+        Database.initializeDb();
+        Database.readAttendanceDb(data, time, new readCallBack() {
+            @Override
+            public void onCallBack(Map dataMap) {
+                    if(dataMap == null)
+                    {
+                        Toast.makeText(NFC_Reading.this,"GOD DAM IT",Toast.LENGTH_SHORT).show();
+                    }
+            }
+        });
+        return;
     }
 
 }
