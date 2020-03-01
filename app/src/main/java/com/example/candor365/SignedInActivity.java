@@ -55,6 +55,7 @@ public class SignedInActivity extends AppCompatActivity {
     private Button signoutButton;
     private Button classSignInButton;
     private Button viewScheduleButton;
+    private Button shopButton;
     private View.OnClickListener signoutListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -70,6 +71,8 @@ public class SignedInActivity extends AppCompatActivity {
         signoutButton = (Button) findViewById(R.id.sign_out);
         signoutButton.setOnClickListener(signoutListener);
 
+        shopButton = (Button) findViewById(R.id.shop_button);
+        shopButton.setOnClickListener(shopButtonListener);
 
         viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
         viewScheduleButton.setOnClickListener(viewScheduleListener);
@@ -125,4 +128,10 @@ public class SignedInActivity extends AppCompatActivity {
         startActivity(new Intent(SignedInActivity.this, CalendarActivity.class));
         finish();
     }
+    private View.OnClickListener shopButtonListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            startActivity(new Intent(SignedInActivity.this, DummyActivity.class));
+        }
+    };
 }
