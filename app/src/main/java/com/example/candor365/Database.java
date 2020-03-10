@@ -106,7 +106,20 @@ class Database {
     */
     static void addNewItem(Map item, String category){
         final String item_name = (String) item.get("item_name");
-        db.collection("store").document("category").collection(category).document("shoes").set(item);
+        db.collection("store").document("category").collection(category).document(item_name)
+                .set(item)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Item successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Item could not be added");
+                    }
+                });
     }
 
 }
