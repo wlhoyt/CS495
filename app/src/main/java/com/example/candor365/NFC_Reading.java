@@ -26,7 +26,8 @@ import java.util.Map;
 public class NFC_Reading extends AppCompatActivity {
     NfcAdapter nfcAdapter;
     TextView testing;
-
+    String date;
+    String time;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +35,9 @@ public class NFC_Reading extends AppCompatActivity {
         setContentView(R.layout.nfc_reading_activity);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        testing = (TextView)findViewById(R.id.testing);
+        testing = (TextView) findViewById(R.id.testing);
+        setDate("12");
+        setTime("12");
     }
 
     @Override
@@ -42,42 +45,34 @@ public class NFC_Reading extends AppCompatActivity {
 
         super.onNewIntent(intent);
 
-        if(intent.hasExtra(NfcAdapter.EXTRA_TAG))
-        {
+        if (intent.hasExtra(NfcAdapter.EXTRA_TAG)) {
 
 
-            Parcelable [] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            Parcelable[] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 
-            if(parcelables != null && parcelables.length > 0 )
-            {
+            if (parcelables != null && parcelables.length > 0) {
                 readTextFromMessage((NdefMessage) parcelables[0]);
-            }
-            else
-            {
-               Toast.makeText(this,"No NDEF Message",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "No NDEF Message", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void readTextFromMessage(NdefMessage ndefMessage)
-    {
-        NdefRecord [] ndefRecords = ndefMessage.getRecords();
-        if(ndefRecords != null && ndefRecords.length > 0)
-        {
+    private void readTextFromMessage(NdefMessage ndefMessage) {
+        NdefRecord[] ndefRecords = ndefMessage.getRecords();
+        if (ndefRecords != null && ndefRecords.length > 0) {
             NdefRecord ndefRecord = ndefRecords[0];
             String tagContent = getTextFromNdefRecord(ndefRecord);
-//            attendanceChecker(tagContent);
+            attendanceChecker(tagContent);
             preregisterChecker(tagContent);
-        }
-        else
-        {
-           Toast.makeText(this,"No NDEF records found!",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "No NDEF records found!", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     protected void onResume() {
-       super.onResume();
+        super.onResume();
 
         enableForegroundDispatchSystem();
     }
@@ -94,87 +89,78 @@ public class NFC_Reading extends AppCompatActivity {
         return new Intent().setClass(context, NFC_Reading.class);
     }
 
-    private void enableForegroundDispatchSystem()
-    {
+    private void enableForegroundDispatchSystem() {
         Intent intent = new Intent(this, NFC_Reading.class).addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         IntentFilter[] intentFilters = new IntentFilter[]{};
 
-        nfcAdapter.enableForegroundDispatch(this, pendingIntent,intentFilters,null);
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilters, null);
     }
-    private void disableForegroundDispatchSystem()
-    {
+
+    private void disableForegroundDispatchSystem() {
         nfcAdapter.disableForegroundDispatch(this);
     }
 
 
-    public String getTextFromNdefRecord(NdefRecord ndefRecord)
-    {
+    public String getTextFromNdefRecord(NdefRecord ndefRecord) {
         String tagContent = null;
-        try
-        {
+        try {
             byte[] payload = ndefRecord.getPayload();
             String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
             int languageSize = payload[0] & 0063;
-            tagContent = new String(payload,languageSize + 1, payload.length - languageSize - 1, textEncoding);
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            Log.e("getTextFromNdefRecord",e.getMessage());
+            tagContent = new String(payload, languageSize + 1, payload.length - languageSize - 1, textEncoding);
+        } catch (UnsupportedEncodingException e) {
+            Log.e("getTextFromNdefRecord", e.getMessage());
         }
         return tagContent;
     }
 
-    public void preregisterChecker(String nfc_tag)
-    {
-        Database.initializeDb();
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        String username = acct.getDisplayName();
-//        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
-        String date = "2020214";
-        String time = "6:30";
-        Database.readClassDb(date, time, new readCallBack() {
-            @Override
-            public void onCallBack(Map dataMap) {
-
-                if(dataMap != null)
-                {
-
-                    Toast.makeText(NFC_Reading.this, dataMap.toString() + "Harder", Toast.LENGTH_SHORT).show();
-                    testing.setText(dataMap.toString());
-                }
-                else
-                {
-                    Toast.makeText(NFC_Reading.this,"DataMap Not Working",Toast.LENGTH_SHORT).show();
-                    Log.d("NFC_READING","HERE THE FUCK I AM ---------------------------------------------------");
-                }
-            }
-        });
-    }
-
-//    public void attendanceChecker (String nfc_tag)
-//    {
+    public void preregisterChecker(String nfc_tag) {
 //        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
 //        String username = acct.getDisplayName();
-////        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
-////        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
-//        String date = "2020214";
-//        String time = "6:30";
-//        Database.initializeDb();
-//        Database.readAttendanceDb(date, time, new readCallBack() {
+//        Database.readPreregisterDb(date, time, new readCallBack() {
 //            @Override
 //            public void onCallBack(Map dataMap) {
-//                    if(dataMap == null)
-//                    {
-//                        Toast.makeText(NFC_Reading.this,"GOD DAM IT",Toast.LENGTH_SHORT).show();
-//
-//                    }
+//                if (dataMap != null) {
+//                    testing.setText((dataMap.toString()));
+//                }
 //            }
 //        });
-//        return;
-//    }
+    }
+    public void attendanceChecker (String nfc_tag)
+    {
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+            String username = acct.getDisplayName();
 
+            Database.readAttendanceDb(date, time, new readCallBack() {
+                @Override
+                public void onCallBack(Map dataMap) {
+                    if (dataMap != null) {
+
+                        for(int i = 0; i< dataMap.size();i++)
+                        {
+
+                        }
+                    }
+                }
+            });
+    }
+    public void setDate(String Eventdate)
+    {
+        date = "2020214";
+    }
+    public void setTime(String Eventtime)
+    {
+        time = "6:30";
+    }
+    public String getDate()
+    {
+        return date;
+    }
+    public String getTime()
+    {
+        return  time;
+    }
 }

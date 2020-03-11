@@ -64,19 +64,36 @@ class Database {
     }
 
      static void readPreregisterDb(final String date, String time, final readCallBack reader){
-        db.collection("classesByDate").document(date).collection(time).document("Preregister")
+         db.collection("classesByDate").document(date).collection(time).document("Preregister")
+                 .get()
+                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                     @Override
+                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                         Map data = documentSnapshot.getData();
+                         if (data != null)
+                             Log.d(TAG, "Document data => " + data.toString());
+                         reader.onCallBack(data);
+                     }
+                 }).addOnFailureListener(new OnFailureListener() {
+             @Override
+             public void onFailure(@NonNull Exception e) {
+                 Map emptyData=null;
+                 reader.onCallBack(emptyData);
+             }
+         });
+    }
+
+    static void readAttendanceDb(final String date, String time, final readCallBack reader){
+
+
+        db.collection("classesByDate").document(date).collection(time).document("Attendance")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Map data = documentSnapshot.getData();
-                        if (data != null) {
+                        if (data != null)
                             Log.d(TAG, "Document data => " + data.toString());
-                        }
-//                        else
-//                        {
-//                            Log.d(TAG,"No data in Map Data");
-//                        }
                         reader.onCallBack(data);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -87,26 +104,4 @@ class Database {
             }
         });
     }
-//
-//    static void readAttendanceDb(final String date, String time, final readCallBack reader){
-//
-//
-//        db.collection("classesByDate").document(date).collection(time).document("Attendance")
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        Map data = documentSnapshot.getData();
-//                        if (data != null)
-//                            Log.d(TAG, "Document data => " + data.toString());
-//                        reader.onCallBack(data);
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Map emptyData=null;
-//                reader.onCallBack(emptyData);
-//            }
-//        });
-//    }
 }
