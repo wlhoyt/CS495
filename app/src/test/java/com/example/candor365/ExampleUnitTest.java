@@ -1,6 +1,11 @@
 package com.example.candor365;
 
+import junit.extensions.ActiveTestSuite;
+
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -13,5 +18,8 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+    public void something(){
+
     }
 }
