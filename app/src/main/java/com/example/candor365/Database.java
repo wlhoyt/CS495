@@ -1,23 +1,10 @@
 package com.example.candor365;
 
-
-
-
-import android.nfc.NfcAdapter;
 import android.util.Log;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.protobuf.Api;
-
-import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
@@ -38,10 +25,10 @@ class Database {
         //need error checking
     }
 
-    static void readClassDb(final String date, final readCallBack reader){
+    static void readClassDb(final String date, String time, final readCallBack reader){
 
 
-        db.collection("classesByDate").document(date).collection("6:30").document("ClassInfo")
+        db.collection("classesByDate").document(date).collection(time).document("ClassInfo")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
