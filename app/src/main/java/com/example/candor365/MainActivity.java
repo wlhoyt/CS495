@@ -36,12 +36,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Arrays;
 
-import butterknife.BindView;
+
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 472;
-    @BindView(android.R.id.content) View mRootView;
+
 
     private Button googleSignInButton;
 
@@ -121,9 +121,7 @@ public class MainActivity extends AppCompatActivity {
         return new Intent().setClass(context, MainActivity.class);
     }
 
-    private void showSnackbar(@StringRes int errorMessageRes) {
-        Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
-    }
+
 
     private void signIn(){
         startActivityForResult(
