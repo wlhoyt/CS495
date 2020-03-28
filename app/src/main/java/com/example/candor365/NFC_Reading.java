@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class NFC_Reading extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class NFC_Reading extends AppCompatActivity {
     TextView testing;
     String date;
     String time;
-
+    String nfcTag;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class NFC_Reading extends AppCompatActivity {
         testing = (TextView) findViewById(R.id.testing);
         setDate("12");
         setTime("12");
+
     }
 
     @Override
@@ -52,19 +54,22 @@ public class NFC_Reading extends AppCompatActivity {
 
             if (parcelables != null && parcelables.length > 0) {
                 readTextFromMessage((NdefMessage) parcelables[0]);
+                Toast.makeText(this, nfcTag, Toast.LENGTH_LONG).show();
+                preregisterChecker(nfcTag);
+                attendanceChecker(nfcTag);
             } else {
                 Toast.makeText(this, "No NDEF Message", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    // This is where the tag set read from
     private void readTextFromMessage(NdefMessage ndefMessage) {
         NdefRecord[] ndefRecords = ndefMessage.getRecords();
         if (ndefRecords != null && ndefRecords.length > 0) {
             NdefRecord ndefRecord = ndefRecords[0];
-            String tagContent = getTextFromNdefRecord(ndefRecord);
-            attendanceChecker(tagContent);
-            preregisterChecker(tagContent);
+            nfcTag = getTextFromNdefRecord(ndefRecord);
+
         } else {
             Toast.makeText(this, "No NDEF records found!", Toast.LENGTH_LONG).show();
         }
@@ -118,34 +123,72 @@ public class NFC_Reading extends AppCompatActivity {
     }
 
     public void preregisterChecker(String nfc_tag) {
-//        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-//        String username = acct.getDisplayName();
-//        Database.readPreregisterDb(date, time, new readCallBack() {
-//            @Override
-//            public void onCallBack(Map dataMap) {
-//                if (dataMap != null) {
-//                    testing.setText((dataMap.toString()));
-//                }
-//            }
-//        });
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        final String username = acct.getDisplayName();
+
+        // Database.java runs the function for the initial read for comparision
+        Database.readPreregisterDb(date, time, new readCallBack() {
+            @Override
+            public void onCallBack(Map dataMap) {
+                if(dataMap == null)
+                {
+                    Toast.makeText(NFC_Reading.this,"ERROR: DATAMAP IS NULL", Toast.LENGTH_LONG).show();
+                }
+                // If the user in is the class notify them and return else add user to the class
+               if(dataMap.containsValue(username))
+                {
+                    Toast.makeText(NFC_Reading.this,"User is in the class",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else
+                 {
+                    Toast.makeText(NFC_Reading.this,"User is NOT IN THE CLASS",Toast.LENGTH_LONG).show();
+                    // Send the data the user's name to the data for that class
+                 }
+                Toast.makeText(NFC_Reading.this,dataMap.toString(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
     public void attendanceChecker (String nfc_tag)
     {
-            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-            String username = acct.getDisplayName();
-
-            Database.readAttendanceDb(date, time, new readCallBack() {
-                @Override
-                public void onCallBack(Map dataMap) {
-                    if (dataMap != null) {
-
-                        for(int i = 0; i< dataMap.size();i++)
-                        {
-
-                        }
-                    }
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        final String username = acct.getDisplayName();
+        Database.readAttendanceDb(date, time, new readCallBack() {
+            @Override
+            public void onCallBack(Map dataMap) {
+                if(dataMap == null) {
+                    Toast.makeText(NFC_Reading.this, "ERROR: DATAMAP IS NULL", Toast.LENGTH_LONG).show();
                 }
-            });
+                if(dataMap.containsValue(username))
+                {
+                    // IF the user is in the class
+                    Toast.makeText(NFC_Reading.this,"USER IS ALREADY IN CLASS", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    // Check if the user is part of the class (MODIFY THE PREREGISTER FUNCTION)
+                    Database.readPreregisterDb(date, time, new readCallBack() {
+                        @Override
+                        public void onCallBack(Map dataMap) {
+                            if (dataMap == null) {
+                                Toast.makeText(NFC_Reading.this, "ERROR: DATA IS NULL", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            // IF the user preregister for the class
+                            if(dataMap.containsValue(username))
+                            {
+                                // Send the user's name to the database for attendance
+                            }
+                            else
+                            {
+                                Toast.makeText(NFC_Reading.this,"ERROR: USER IS NOT SIGNED UP FOR THE CLASS",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
     }
     public void setDate(String Eventdate)
     {

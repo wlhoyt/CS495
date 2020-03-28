@@ -104,4 +104,13 @@ class Database {
             }
         });
     }
+
+    static void writePreregisterDb(Map docData, String date){
+        db.collection("classesByDate").document(date).collection("6:30").document("Preregister").set(docData);
+        //need error checking
+    }
+    static void writeAttendanceDb(Map docData, String date){
+        db.collection("classesByDate").document(date).collection("6:30").document("Attendance").set(docData);
+        //need error checking
+    }
 }
