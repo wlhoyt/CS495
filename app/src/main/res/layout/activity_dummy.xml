@@ -11,6 +11,8 @@
         android:id="@+id/shop_item"
         android:layout_width="match_parent"
         android:layout_height="108dp"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
         android:text="shop_item" />
 
     <EditText

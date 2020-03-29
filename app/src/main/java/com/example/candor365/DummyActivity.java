@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.provider.ContactsContract;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 //import android.widget.ListView;
@@ -50,6 +51,7 @@ public class DummyActivity extends AppCompatActivity {
         itemQuantity = (TextView) findViewById(R.id.itemQuantity);
 
         shopList = (TextView) findViewById(R.id.shop_item);
+        shopList.setMovementMethod(new ScrollingMovementMethod());
         shopList.setText("");
         Database.initializeDb();
         Database.readShopDb("clothes", new readCallBack() {
@@ -88,18 +90,27 @@ public class DummyActivity extends AppCompatActivity {
     private void onFilterButtonClicked(){
         String item_category = itemCategory.getText().toString();
         shopList.setText("");
-        if(item_category.equals(null)){
+        if(!item_category.equals("clothes") && !item_category.equals("consumables") && !item_category.equals("other")){
             //no filter
             Database.readShopDb("consumables", new readCallBack() {
                 @Override
                 public void onCallBack(Map dataMap) {
                     if(dataMap != null){
-                        shopList.setText(dataMap.toString());
+                        shopList.append(dataMap.toString());
                     }
                 }
             });
 
             Database.readShopDb("clothes", new readCallBack() {
+                @Override
+                public void onCallBack(Map dataMap) {
+                    if(dataMap != null){
+                        shopList.append(dataMap.toString());
+                    }
+                }
+            });
+
+            Database.readShopDb("other", new readCallBack() {
                 @Override
                 public void onCallBack(Map dataMap) {
                     if(dataMap != null){
