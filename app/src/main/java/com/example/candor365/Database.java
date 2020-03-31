@@ -5,7 +5,6 @@ package com.example.candor365;
 
 import android.nfc.NfcAdapter;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,10 +40,10 @@ class Database {
         //need error checking
     }
 
-    static void readClassDb(final String date, final readCallBack reader){
+    static void readClassDb(final String date, String time, final readCallBack reader){
 
 
-        db.collection("classesByDate").document(date).collection("6:30").document("ClassInfo")
+        db.collection("classesByDate").document(date).collection(time).document("ClassInfo")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
