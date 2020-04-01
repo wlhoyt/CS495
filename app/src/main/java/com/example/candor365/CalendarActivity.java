@@ -1,40 +1,17 @@
 package com.example.candor365;
 
-//import android.content.Context;
-//import android.content.Intent;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-/*
-import com.firebase.ui.auth.IdpResponse;
-import com.firebase.ui.auth.util.ExtraConstants;
-*/
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-/*
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-*/
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.provider.CalendarContract;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-
-import static java.lang.Thread.sleep;
 
 public class CalendarActivity extends AppCompatActivity {
     private Button backButton;
@@ -84,13 +61,20 @@ public class CalendarActivity extends AppCompatActivity {
                 classView = (TextView) findViewById(R.id.classEvent);
                 String date = year + ""+ (month+1) + dayOfMonth;
                 classView.setText("");
-                Database.readClassDb(date, new readCallBack() {
-                    @Override
-                    public void onCallBack(Map dataMap) {
-                        if (dataMap!=null)
-                            classView.setText(dataMap.toString());
-                    }
-                });
+                List<String> times = new ArrayList<>();
+                times.add("6:30");
+                times.add("7:30");
+                times.add("8:30");
+                for (String time : times) {
+                    Database.readClassDb(date, time, new readCallBack() {
+                        @Override
+                        public void onCallBack(Map dataMap) {
+                            if (dataMap != null)
+                                classView.append(dataMap.toString() + "\n");
+
+                        }
+                    });
+                }
 //
 //                if (data != null) {
 //                    Log.d(TAG, "Data has been populated");
