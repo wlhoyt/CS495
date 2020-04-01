@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DummyActivity">
+
+    <TextView
+        android:id="@+id/shop_item"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:text="shop_item" />
+
+    <EditText
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Item Name" />
+
+    <EditText
+        android:id="@+id/itemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Item Price" />
+
+    <EditText
+        android:id="@+id/itemCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Item Category" />
+
+    <EditText
+        android:id="@+id/itemQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Item Quantity (inventory)" />
+
+    <Button
+        android:id="@+id/addItemButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Item" />
+
+    <Button
+        android:id="@+id/filter_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter" />
+</LinearLayout>
