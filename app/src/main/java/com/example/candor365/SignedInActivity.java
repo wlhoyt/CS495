@@ -74,7 +74,7 @@ public class SignedInActivity extends AppCompatActivity {
     };
     public void attendanceClick()
     {
-        startActivity(NFC_Reading.createIntent(this,null));
+        startActivity(NFC_Reading.createIntent(this));
     }
 
 
