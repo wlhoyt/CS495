@@ -67,7 +67,7 @@ public class CalendarActivity extends AppCompatActivity {
                 times.add("7:30");
                 times.add("8:30");
                 for (String time : times) {
-                    Database.readClassDb(date, time, new readCallBack() {
+                    Database.readPreregisterDb(date, time, new readCallBack() {
                         @Override
                         public void onCallBack(Map dataMap) {
                             if (dataMap != null)

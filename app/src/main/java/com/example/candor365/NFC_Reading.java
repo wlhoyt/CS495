@@ -32,7 +32,7 @@ public class NFC_Reading extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_reading_activity);
-
+   //     this.attendanceChecker("4");
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         testing = (TextView)findViewById(R.id.testing);
     }
@@ -157,13 +157,13 @@ public class NFC_Reading extends AppCompatActivity {
 
 //    public void attendanceChecker (String nfc_tag)
 //    {
-//        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-//        String username = acct.getDisplayName();
+//       // GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+//       // String username = acct.getDisplayName();
 ////        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
 ////        Toast.makeText(this, nfc_tag, Toast.LENGTH_LONG).show();
 //        String date = "2020214";
 //        String time = "6:30";
-//        Database.initializeDb();
+// //       Database.initializeDb();
 //        Database.readAttendanceDb(date, time, new readCallBack() {
 //            @Override
 //            public void onCallBack(Map dataMap) {
