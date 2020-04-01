@@ -12,7 +12,7 @@
         layout="@layout/content_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,10 +32,9 @@
     <ScrollView
         android:layout_width="343dp"
         android:layout_height="83dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="571dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="77dp"
+        android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -44,12 +43,13 @@
         app:layout_constraintVertical_bias="1.0">
 
         <RelativeLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/classEvent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
         </RelativeLayout>
 
 
