@@ -20,24 +20,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.util.HashMap;
 import java.util.Map;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class SignedInActivity extends AppCompatActivity {
     private Button signoutButton;
     private Button classSignInButton;
     private Button viewScheduleButton;
+    private Button shopButton;
     private View.OnClickListener signoutListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -53,6 +52,8 @@ public class SignedInActivity extends AppCompatActivity {
         signoutButton = (Button) findViewById(R.id.sign_out);
         signoutButton.setOnClickListener(signoutListener);
 
+        shopButton = (Button) findViewById(R.id.shop_button);
+        shopButton.setOnClickListener(shopButtonListener);
 
         viewScheduleButton = (Button) findViewById(R.id.viewSchedule);
         viewScheduleButton.setOnClickListener(viewScheduleListener);
@@ -108,4 +109,10 @@ public class SignedInActivity extends AppCompatActivity {
         startActivity(new Intent(SignedInActivity.this, CalendarActivity.class));
         finish();
     }
+    private View.OnClickListener shopButtonListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            startActivity(new Intent(SignedInActivity.this, DummyActivity.class));
+        }
+    };
 }
