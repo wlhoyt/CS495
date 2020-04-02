@@ -41,7 +41,7 @@ public class addCalenderEvent extends AppCompatActivity {
                 R.array.coaches_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         coaches.setAdapter(coachesadapter);
-        class_time.setOnItemSelectedListener(coachesListener);
+        coaches.setOnItemSelectedListener(coachesListener);
 
         saveEventButton = (Button) findViewById(R.id.save_event);
         saveEventButton.setOnClickListener(saveEventListener);
