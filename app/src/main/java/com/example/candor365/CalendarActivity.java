@@ -13,12 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.candor365.Database.readClassDb;
+
 
 public class CalendarActivity extends AppCompatActivity {
     private Button backButton;
     private Button addEventButton;
     private CalendarView eventCalendar;
     private TextView classView;
+    private static String date="";
     static String TAG = "Calendar Activity";
 
     private View.OnClickListener backButtonListener = new View.OnClickListener() {
@@ -60,14 +63,11 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 classView = (TextView) findViewById(R.id.classEvent);
-                String date = year + ""+ (month+1) + dayOfMonth;
+                date = year + ""+ (month+1) + dayOfMonth;
                 classView.setText("");
-                List<String> times = new ArrayList<>();
-                times.add("6:30");
-                times.add("7:30");
-                times.add("8:30");
-                for (String time : times) {
-                    Database.readClassDb(date, time, new readCallBack() {
+                String[] class_times= getResources().getStringArray(R.array.class_time_array);
+                for (String time : class_times) {
+                    readClassDb(date, time, new readCallBack() {
                         @Override
                         public void onCallBack(Map dataMap) {
                             if (dataMap != null)
@@ -76,18 +76,11 @@ public class CalendarActivity extends AppCompatActivity {
                         }
                     });
                 }
-//
-//                if (data != null) {
-//                    Log.d(TAG, "Data has been populated");
-//                    classView.setText(data.toString());
-//                }
-//                else {
-//                    Log.w(TAG, "Could not read Database");
-//                }
-
             }
         });
-        //Database.readClassDb("danielsClass");
     }
 
+    public static String getDate(){
+        return date;
+    }
 }

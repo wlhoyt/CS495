@@ -16,4 +16,17 @@
     <string name="event_name">Event Name</string>
     <string name="event_date">Event Date</string>
     <string name="event_description">Event Description</string>
+    <string-array name="class_time_array">
+        <item>6:30am</item>
+        <item>8:30am</item>
+        <item>4:30pm</item>
+        <item>5:30pm</item>
+    </string-array>
+    <string-array name="coaches_array">
+        <item>Adam</item>
+        <item>Jenny</item>
+        <item>Chris</item>
+        <item>Allie</item>
+    </string-array>
+
 </resources>
