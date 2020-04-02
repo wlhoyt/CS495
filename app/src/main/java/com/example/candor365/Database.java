@@ -34,8 +34,8 @@ class Database {
         db = FirebaseFirestore.getInstance();
     }
 
-    static void writeClassDb(Map docData, String date){
-        db.collection("classesByDate").document(date).collection("6:30").document("ClassInfo").set(docData);
+    static void writeClassDb(Map docData, String time, String date){
+        db.collection("classesByDate").document(date).collection(time).document("ClassInfo").set(docData);
         //need error checking
     }
 

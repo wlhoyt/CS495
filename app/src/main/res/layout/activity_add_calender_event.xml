@@ -15,31 +15,18 @@
         android:text="@string/event_name"
         android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/event_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date|datetime"
-        android:text="@string/event_date"
-        android:importantForAutofill="no" />
+    <Spinner
+        android:id="@+id/class_time_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/event_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textShortMessage"
-        android:text="@string/event_description"
-        android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/event_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="TESTING TO SEE IF EMULATOR FINDS THIS" />
+    <Spinner
+        android:id="@+id/coaches_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
 
     <Button
         android:id="@+id/save_event"
