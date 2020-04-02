@@ -89,6 +89,7 @@ public class addCalenderEvent extends AppCompatActivity {
 
         data.put("event_name", event_name);
         data.put("coach", coach);
+        data.put("class_time", time);
         data.put("nfcID", nfcID);
 
         Database.writeClassDb(data, time ,date);

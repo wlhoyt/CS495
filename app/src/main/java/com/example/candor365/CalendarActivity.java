@@ -65,11 +65,8 @@ public class CalendarActivity extends AppCompatActivity {
                 classView = (TextView) findViewById(R.id.classEvent);
                 date = year + ""+ (month+1) + dayOfMonth;
                 classView.setText("");
-                List<String> times = new ArrayList<>();
-                times.add("6:30");
-                times.add("7:30");
-                times.add("8:30");
-                for (String time : times) {
+                String[] class_times= getResources().getStringArray(R.array.class_time_array);
+                for (String time : class_times) {
                     readClassDb(date, time, new readCallBack() {
                         @Override
                         public void onCallBack(Map dataMap) {
