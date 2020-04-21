@@ -33,24 +33,56 @@ public class DummyActivity extends AppCompatActivity {
     private TextView itemPrice;
     private TextView itemCategory;
     private TextView itemQuantity;
+
+    private View.OnClickListener itemNameListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            itemName.setText("");
+        }
+    };
+
+    private View.OnClickListener itemPriceListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            itemPrice.setText("");
+        }
+    };
+
+    private View.OnClickListener itemCategoryListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            itemCategory.setText("");
+        }
+    };
+
+    private View.OnClickListener itemQuantityListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            itemQuantity.setText("");
+        }
+    };
+
     private View.OnClickListener filterButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             onFilterButtonClicked();
         }
     };
+
     private View.OnClickListener deleteButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             onDeleteButtonClicked(itemName.getText().toString(), itemCategory.getText().toString());
         }
     };
+
     private View.OnClickListener saveItemButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             onSaveItemButtonClicked();
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +90,18 @@ public class DummyActivity extends AppCompatActivity {
         save_item_button = (Button) findViewById(R.id.addItemButton);
         filterButton = (Button) findViewById(R.id.filter_button);
         deleteButton = (Button) findViewById(R.id.delete_button);
+
         itemName  = (TextView) findViewById(R.id.itemName);
-        itemPrice  = (TextView) findViewById(R.id.itemPrice);
+        itemName.setOnClickListener(itemNameListener);
+
+        itemPrice = (TextView) findViewById(R.id.itemPrice);
+        itemPrice.setOnClickListener(itemPriceListener);
+
         itemCategory = (TextView) findViewById(R.id.itemCategory);
+        itemCategory.setOnClickListener(itemCategoryListener);
+
         itemQuantity = (TextView) findViewById(R.id.itemQuantity);
+        itemQuantity.setOnClickListener(itemQuantityListener);
 
         shopList = (TextView) findViewById(R.id.shop_item);
         shopList.setMovementMethod(new ScrollingMovementMethod());
