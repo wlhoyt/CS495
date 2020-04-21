@@ -1,7 +1,9 @@
 package com.example.candor365;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.provider.ContactsContract;
@@ -19,9 +21,14 @@ import java.util.Map;
 
 public class DummyActivity extends AppCompatActivity {
 
+    AlertDialog dialog;
+    AlertDialog.Builder builder;
+
+
     private TextView shopList;
     private Button save_item_button;
     private Button filterButton;
+    private Button deleteButton;
     private TextView itemName;
     private TextView itemPrice;
     private TextView itemCategory;
@@ -30,6 +37,12 @@ public class DummyActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             onFilterButtonClicked();
+        }
+    };
+    private View.OnClickListener deleteButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            onDeleteButtonClicked(itemName.getText().toString(), itemCategory.getText().toString());
         }
     };
     private View.OnClickListener saveItemButtonListener = new View.OnClickListener() {
@@ -44,7 +57,7 @@ public class DummyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dummy);
         save_item_button = (Button) findViewById(R.id.addItemButton);
         filterButton = (Button) findViewById(R.id.filter_button);
-
+        deleteButton = (Button) findViewById(R.id.delete_button);
         itemName  = (TextView) findViewById(R.id.itemName);
         itemPrice  = (TextView) findViewById(R.id.itemPrice);
         itemCategory = (TextView) findViewById(R.id.itemCategory);
@@ -62,7 +75,7 @@ public class DummyActivity extends AppCompatActivity {
                 }
             }
         });
-
+        deleteButton.setOnClickListener(deleteButtonListener);
         save_item_button.setOnClickListener(saveItemButtonListener);
         filterButton.setOnClickListener(filterButtonListener);
 
@@ -131,6 +144,30 @@ public class DummyActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void onDeleteButtonClicked(final String item, final String category){
+        builder = new AlertDialog.Builder(DummyActivity.this);
+        builder.setTitle("Are you sure you want to delete this item?");
+
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //actually delete the item
+                Database.deleteItem(item,category);
+                //need to also update the textView
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+
+            }
+        });
+
+        dialog = builder.create();
+        dialog.show();
     }
 
 }
