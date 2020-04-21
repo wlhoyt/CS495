@@ -41,12 +41,14 @@ public class unitTests extends TestCase {
     @Test
     public void testReadSpecificCategory(){
         final Map<String, Object> testItem = new HashMap<>();
-        testItem.put("item_name","beanie");
-        testItem.put("item_price", "$7.99");
-        testItem.put("item_quantity", "15");
-        testItem.put("item_name","beanie");
-        testItem.put("item_price", "$7.99");
-        testItem.put("item_quantity", "15");
+        testItem.put("item_name","Gym Membership");
+        testItem.put("item_price", "$45");
+        testItem.put("item_quantity", "monthly");
+        testItem.put("membership_price","$45");
+        testItem.put("renewal", true);
+        testItem.put("renewal_rate", "monthly");
+
+        assertEquals("Gym Membership", testItem.get("item_name"));
     }
 
 
