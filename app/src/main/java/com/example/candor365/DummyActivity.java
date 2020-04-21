@@ -156,13 +156,14 @@ public class DummyActivity extends AppCompatActivity {
                 //actually delete the item
                 Database.deleteItem(item,category);
                 //need to also update the textView
+                startActivity(new Intent(DummyActivity.this, DummyActivity.class));
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //do nothing
-
+//                startActivity(new Intent(DummyActivity.this, DummyActivity.class));
             }
         });
 
