@@ -169,4 +169,20 @@ class Database {
         db.collection("classesByDate").document(date).collection("6:30").document("Attendance").set(docData);
         //need error checking
     }
+    static void deleteItem(String item, String category){
+        db.collection("store").document("category").collection(category).document(item)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Item successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+    }
 }
