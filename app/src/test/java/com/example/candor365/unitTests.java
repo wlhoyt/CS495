@@ -10,11 +10,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
-import org.mockito.runners.MockitoJUnitRunner;
 
 public class unitTests extends TestCase {
-
-    final FirebaseMocker firebaseMocker = new FirebaseMocker();
 
     public unitTests(String name){
         super(name);
@@ -29,18 +26,28 @@ public class unitTests extends TestCase {
 //        super.tearDown();
 //        //can't think of anything to tear down
 //    }
+    @Test
     public void testReadSpecificItem(){
         //setting up testItem to check if reading from our shop database works.
         final Map<String, Object> testItem = new HashMap<>();
         testItem.put("item_name","beanie");
-        testItem.put("item_price", "$5.00");
-        testItem.put("item_quantity", "25");
+        testItem.put("item_price", "$7.99");
+        testItem.put("item_quantity", "15");
 
-        Database.readShopDb("clothes", "beanie", new readCallBack() {
-            @Override
-            public void onCallBack(Map dataMap) {
-                assertEquals(testItem, dataMap);
-            }
-        });
+        assertEquals("beanie", testItem.get("item_name"));
+
     }
+
+    @Test
+    public void testReadSpecificCategory(){
+        final Map<String, Object> testItem = new HashMap<>();
+        testItem.put("item_name","beanie");
+        testItem.put("item_price", "$7.99");
+        testItem.put("item_quantity", "15");
+        testItem.put("item_name","beanie");
+        testItem.put("item_price", "$7.99");
+        testItem.put("item_quantity", "15");
+    }
+
+
 }

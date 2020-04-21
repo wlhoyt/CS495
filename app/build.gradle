@@ -42,6 +42,4 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'com.firebase:firebase-client-android:2.5.0'
-    androidTestImplementation 'org.mockito:mockito-core:1.9.5'
-    testImplementation 'org.mockito:mockito-core:1.9.5'
 }
