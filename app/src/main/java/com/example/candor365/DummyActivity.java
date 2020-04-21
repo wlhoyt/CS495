@@ -18,6 +18,7 @@ import com.google.firebase.firestore.CollectionReference;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class DummyActivity extends AppCompatActivity {
 
@@ -111,7 +112,7 @@ public class DummyActivity extends AppCompatActivity {
             @Override
             public void onCallBack(Map dataMap) {
                 if(dataMap != null){
-                    shopList.append(dataMap.toString());
+                    shopList.append(Objects.requireNonNull(dataMap.get("item_name")).toString() + "\t" + Objects.requireNonNull(dataMap.get("item_price")).toString() + "\tQuantity: " + Objects.requireNonNull(dataMap.get("item_quantity")).toString());
                 }
             }
         });
@@ -149,7 +150,7 @@ public class DummyActivity extends AppCompatActivity {
                 @Override
                 public void onCallBack(Map dataMap) {
                     if(dataMap != null){
-                        shopList.append(dataMap.toString());
+                        shopList.append(Objects.requireNonNull(dataMap.get("item_name")).toString() + "\tPrice: " + Objects.requireNonNull(dataMap.get("item_price")).toString() + "\tQuantity: " + Objects.requireNonNull(dataMap.get("item_quantity")).toString() + "\n");
                     }
                 }
             });
@@ -158,7 +159,7 @@ public class DummyActivity extends AppCompatActivity {
                 @Override
                 public void onCallBack(Map dataMap) {
                     if(dataMap != null){
-                        shopList.append(dataMap.toString());
+                        shopList.append(Objects.requireNonNull(dataMap.get("item_name")).toString() + "\tPrice: " + Objects.requireNonNull(dataMap.get("item_price")).toString() + "\tQuantity: " + Objects.requireNonNull(dataMap.get("item_quantity")).toString() + "\n");
                     }
                 }
             });
@@ -167,7 +168,7 @@ public class DummyActivity extends AppCompatActivity {
                 @Override
                 public void onCallBack(Map dataMap) {
                     if(dataMap != null){
-                        shopList.append(dataMap.toString());
+                        shopList.append(Objects.requireNonNull(dataMap.get("item_name")).toString() + "\tPrice:" + Objects.requireNonNull(dataMap.get("item_price")).toString() + "\tRenewal rate: " + Objects.requireNonNull(dataMap.get("item_quantity")).toString() + "\n");
                     }
                 }
             });
@@ -179,7 +180,7 @@ public class DummyActivity extends AppCompatActivity {
                 @Override
                 public void onCallBack(Map dataMap) {
                     if(dataMap != null){
-                        shopList.append(dataMap.toString());
+                        shopList.append(Objects.requireNonNull(dataMap.get("item_name")).toString() + "\tPrice: " + Objects.requireNonNull(dataMap.get("item_price")).toString() + "\tQuantity: " + Objects.requireNonNull(dataMap.get("item_quantity")).toString() + "\n");
                     }
                 }
             });
