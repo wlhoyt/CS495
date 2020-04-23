@@ -74,7 +74,8 @@ public class SignedInActivity extends AppCompatActivity {
     };
     public void attendanceClick()
     {
-        startActivity(NFC_Reading.createIntent(this));
+        Toast.makeText(this,"The feature is not allowed for emulators function",Toast.LENGTH_SHORT).show();
+//        startActivity(NFC_Reading.createIntent(this));
     }
 
 
@@ -90,7 +91,7 @@ public class SignedInActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
                         // user is now signed out
-                        Toast.makeText(SignedInActivity.this, "USER SIGNED OUT", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SignedInActivity.this, "USER SIGNED OUT", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignedInActivity.this, MainActivity.class));
                         finish();
                     }
