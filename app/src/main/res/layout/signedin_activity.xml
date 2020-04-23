@@ -11,55 +11,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="495dp"
-        android:layout_marginEnd="161dp"
+        android:layout_marginEnd="500dp"
         android:layout_marginBottom="188dp"
         android:layout_weight="1"
         android:text="@string/sign_out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032" />
 
     <Button
         android:id="@+id/viewSchedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="199dp"
+        android:layout_width="142dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="464dp"
         android:layout_marginEnd="141dp"
-        android:layout_marginBottom="484dp"
         android:text="@string/view_schedule"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/class_sign_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="137dp"
+        android:layout_height="86dp"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="314dp"
+        android:layout_marginTop="620dp"
         android:layout_marginEnd="163dp"
-        android:layout_marginBottom="133dp"
         android:text="Class Sign In"
-        app:layout_constraintBottom_toTopOf="@+id/sign_out"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.387"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/shop_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginBottom="43dp"
+        android:layout_width="133dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="278dp"
+        android:layout_marginTop="628dp"
         android:text="Shop"
-        app:layout_constraintBottom_toTopOf="@+id/sign_out"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/class_sign_in" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

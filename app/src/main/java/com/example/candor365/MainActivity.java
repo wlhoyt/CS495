@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         googleSignInButton.setOnClickListener(googleSignInListener);
         if (mAuth.getCurrentUser() != null) {
             //signed in
-            Toast.makeText(getApplicationContext(),"Already Signed In", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(),"Already Signed In", Toast.LENGTH_SHORT).show();
             startActivity(SignedInActivity.createIntent(this, null));
         } else {
             // not signed in
@@ -73,15 +73,15 @@ public class MainActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Result Code "+ resultCode, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Result Code "+ resultCode, Toast.LENGTH_SHORT).show();
                 startActivity(SignedInActivity.createIntent(this, response));
-                Toast.makeText(this, "Logging IN", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Logging IN", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
-                    Toast.makeText(this, "Login cancelled", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Login cancelled", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                Toast.makeText(this, "It just Barfed " + resultCode, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "It just Barfed " + resultCode, Toast.LENGTH_SHORT).show();
                 //Log.e(TAG, "Sign-in error: ", response.getError());
             }
         }
